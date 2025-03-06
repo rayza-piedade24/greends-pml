@@ -37,13 +37,13 @@ The goal of the first class is to give an introduction to ML and also to show so
 The goal of the following classes is to understand how ML models can be trained in and used to solve regression and classification problems. We start by applying the machine learning approach to well-known statistical problems like linear regression to illustrate the stepwise approach followed in ML. We use synthetic data generated from a linear or quadratic regression, where one can control the underlying model and the amout of noise. Then, we consider the  `Iris` tabular data set with 4 explanatory variables and categorical label that can be one of three species.
 
 - Video on the Perceptron and early times of AI [The First Neural Networks](https://www.youtube.com/watch?v=e5dVSygXbAE&t=88s)
-- Basic concepts in Machine learning: *model*, *fit*, *iterations* aka *epochs*, *loss*, *learning rate*, *perceptron*, parameters *weights*, for a simple regression problem. 
+- Basic concepts in Machine learning: *model*, *fit*, *epochs*, *loss*, *learning rate*, *perceptron*, parameters *weights*, for a simple regression problem. 
 - Consider the following pseudo-code to train a simple Linear Regression model. What is the *loss* function that we aim at minimizing? What is the strategy to reduce the *loss* in each iteration? Is there a risk of *over-fitting*?
   
   ---
   Pseudo code for SGD (stochastic gradient descent) to fit a linear regression:
   
-  - Dataset:  $D = {(x_1^{(i)}, ..., x_n^{(i)}, y^{(i)})}_{i=1}^N$  `N observations, n features`
+  - Dataset:  $D = {(x_1^{(i)}, ..., x_n^{(i)}, y^{(i)})}\_{i=1}\^N$  `N observations, n features`
   - Learning rate:  $\eta$ `Small positive value`
   - Max iterations: max_iter `Number of epochs`
   - Initial weights $w$ := $(w_0, w_1, ..., w_n)$ `Typically, all zero`
