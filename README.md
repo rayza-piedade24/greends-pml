@@ -11,7 +11,9 @@ Links for class resources:
   - [Moodle ULisboa](https://elearning.ulisboa.pt/). Evaluation: assignments. The course is called [Practical Machine Learning](https://elearning.ulisboa.pt/course/view.php?id=10469). Students need to self-register in the Moodle page for the course.
   - [Kaggle](https://www.kaggle.com/). Access to data; candidate problems for the final project.
 
+<!---
 [Overview notebook](https://github.com/isa-ulisboa/greends-pml/blob/main/ML_overview_with_examples.ipynb) This notebook provides an overview of the full course and contains pointers for other sources of relevant information and Python scripts.
+--->
 
 ---
 
@@ -37,7 +39,7 @@ The goal of the first class is to give an introduction to ML and also to show so
 The goal of the following classes is to understand how ML models can be trained in and used to solve regression and classification problems. We start by applying the machine learning approach to well-known statistical problems like linear regression to illustrate the stepwise approach followed in ML. We use synthetic data generated from a linear or quadratic regression, where one can control the underlying model and the amout of noise. Then, we consider the  `Iris` tabular data set with 4 explanatory variables and categorical label that can be one of three species.
 
 - Video on the Perceptron and early times of AI [The First Neural Networks](https://www.youtube.com/watch?v=e5dVSygXbAE&t=88s)
-- Basic concepts in Machine learning: *model*, *fit*, *epochs*, *loss*, *learning rate*, *perceptron*, parameters *weights*, for a simple regression problem. 
+- Basic concepts in Machine learning: *model*, *fit*, *epochs*, *loss*, *learning rate*, *perceptron*, parameters *weights*, for a simple regression problem. See [Basic concepts notebook](docs/basic_concepts.md).
 - Consider the following pseudo-code to train a simple Linear Regression model. What is the *loss* function that we aim at minimizing? What is the strategy to reduce the *loss* in each iteration? Is there a risk of *over-fitting*?
   
   ---
@@ -74,6 +76,13 @@ The goal of the following classes is to understand how ML models can be trained 
   ```
 - Create an animation that shows the position of the fitted line for successive epochs for the example above.
 - How can you adapt the code to address a classification problem where the response $y$ can only be 0 or 1?
+</details>
+
+<details markdown="block">
+<summary> Basic concepts (Mar 7, 2025): SGD, forward pass, backward pass, backpropagation, PyTorch, optimizer, ... </summary>
+
+- See [Basic concepts notebook](docs/basic_concepts.md).
+- 
 </details>
 
 --- 
