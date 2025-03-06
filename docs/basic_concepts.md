@@ -165,7 +165,7 @@ Since those expressions correspond  to the updates in the pseudo-code, this show
 
 # Computing gradients with PyTorch
 
-Video suggestion: [Backpropagation by Patrick Loeber](https://www.youtube.com/watch?v=3Kb0QS6z7WA&list=PLqnslRFeH2UrcDBWF5mfPGpqQDSta6VK4&index=4). The author explains what is a computation graph and how PyTorch uses it to compute gradients. The example uses a very simple model: $\hat{y}=w \dot x$ and the MSE loss which is just $(\hat{y}-y)\^2$.
+Video suggestion: [Backpropagation by Patrick Loeber](https://www.youtube.com/watch?v=3Kb0QS6z7WA&list=PLqnslRFeH2UrcDBWF5mfPGpqQDSta6VK4&index=4). The author explains what is a computation graph and how PyTorch uses it to compute gradients. The example uses a very simple model: $\hat{y}=w \cdot x$ and the MSE loss which is just $(\hat{y}-y)\^2$.
 
 In the following examples, one starts with a step by step code in Python for the linear regression model  that is based on our knowledge of  the gradient expression for the MSE loss function and we convert it into a Pytorch code that can be easily generalized to other models and other loss functions.
 
