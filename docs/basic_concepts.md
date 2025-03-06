@@ -158,12 +158,23 @@ where the errors are given by $y-\hat{y}$ and $\eta$ is the learning rate. What 
 
 In fact, for the MSE loss function $L=\frac{1}{n}\sum_{i=1}^n \left(y_i-\hat{y}_i\right)^2$, it is easy to show that
 
-- $\frac{\partial L}{\partial w_0}=-{\rm error}$, and 
-- $\frac{\partial L}{\partial w_j}=-{\rm error}\cdot x_j$ , for any other model weight ($j > 0$)
+- $\frac{\partial L}{\partial w_0}=-2 \\, {\rm error}$, and 
+- $\frac{\partial L}{\partial w_j}=-2 \\, {\rm error}\cdot x_j$ , for any other model weight ($j > 0$)
 
-Since those expressions correspond precisely to the updates in the pseudo-code, this shows that the pseudo-code is in fact using the MSE loss function and *gradient descent* to update the weights, with $\eta$ as the learning rate. The algorithm is called *stochastic* because the weights are updated after each example is assessed. The alternative is to use *batches of examples* and update weights once per batch. The extreme case of batch processing is to have a single batch containing all examples. In such case the weights are updated only once per epoch.  
+Since those expressions correspond  to the updates in the pseudo-code, this shows that the pseudo-code is in fact using the MSE loss function and *gradient descent* to update the weights, with $\eta$ as the learning rate. The algorithm is called *stochastic* because the weights are updated after each example is assessed. The alternative is to use *batches of examples* and update weights once per batch. The extreme case of batch processing is to have a single batch containing all examples. In such case the weights are updated only once per epoch.  
 
 # Computing gradients with PyTorch
+
+Video suggestion: [Backpropagation by Patrick Loeber](https://www.youtube.com/watch?v=3Kb0QS6z7WA&list=PLqnslRFeH2UrcDBWF5mfPGpqQDSta6VK4&index=4). The author explains what is a computation graph and how PyTorch uses it to compute gradients. The example uses a very simple model: $\hat{y}=w \dot x$ and the MSE loss which is just $(\hat{y}-y)\^2$.
+
+In the following examples, one starts with a step by step code in Python for the linear regression model  that is based on our knowledge of  the gradient expression for the MSE loss function and we convert it into a Pytorch code that can be easily generalized to other models and other loss functions.
+
+Video suggestion: [Gradient Descent with Autograd and Backpropagation by Patrick Loeber](https://www.youtube.com/watch?v=E-I2DNVzQLg). The author first uses `numpy` to create a gradient descent script for a  linear regression model and then replaces the manual gradient calculation by `PyTorch` automatic gradient calculation:
+
+- [numpy version](https://github.com/patrickloeber/pytorchTutorial/blob/master/05_1_gradientdescent_manually.py)
+- [torch version](https://github.com/patrickloeber/pytorchTutorial/blob/master/05_2_gradientdescent_auto.py)
+
+<!---
 
 Below, we discuss a `PyTroch` gradient descent script for the linear regression problem, and we compare the result with the optimal coefficients obtained by *least squares*. The code below shows how *training loss* is  computed.
 
@@ -263,3 +274,5 @@ plt.ylabel('loss (MSE)')
 plt.show()
 ```
 </details>
+
+--->
