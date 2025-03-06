@@ -163,7 +163,7 @@ In fact, for the MSE loss function $L=\frac{1}{n}\sum_{i=1}^n \left(y_i-\hat{y}_
 
 Since those expressions correspond precisely to the updates in the pseudo-code, this shows that the pseudo-code is in fact using the MSE loss function and *gradient descent* to update the weights, with $\eta$ as the learning rate. The algorithm is called *stochastic* because the weights are updated after each example is assessed. The alternative is to use *batches of examples* and update weights once per batch. The extreme case of batch processing is to have a single batch containing all examples. In such case the weights are updated only once per epoch.  
 
-## Computing gradients with PyTorch
+# Computing gradients with PyTorch
 
 Below, we discuss a `PyTroch` gradient descent script for the linear regression problem, and we compare the result with the optimal coefficients obtained by *least squares*. The code below shows how *training loss* is  computed.
 
