@@ -1,4 +1,4 @@
-**Overview of Supervised Machine Learning (ML): basic concepts**
+**Basic concepts of supervised machine learning**
 
 In this course we are dealing with data sets of *labeled examples*. Examples can be described by scalar numbers, rows of tabular data, images, etc. For tabular data, we refer the to columns as *explanatory variables* (sometimes also called *independent* or *descriptive* variables).
 
@@ -138,7 +138,7 @@ Then, the steps of gradient descent algorithm are the following. In ML, one *epo
 
    i) Cumpute $\nabla L({\rm \bf w}^{\star})$
 
-   ii) Update ${\rm \bf w}^{\star}:={\rm \bf w}^{\star} - \eta\, \nabla L({\rm \bf w}^{\star}) $, where $\eta >0 $ is the learning rate.
+   ii) Update ${\rm \bf w}^{\star}:={\rm \bf w}^{\star} - \eta\\, \nabla L({\rm \bf w}^{\star})$, where $\eta>0$ is the learning rate.
 
 ---
 
@@ -150,16 +150,16 @@ The choice of the *learning rate* is critical for a good performance of the algo
 
 Earlier, we looked at a pseudo-code to solve the multiple linear regression problem iteratively. The weight updates were done with the following steps:
 
-    - $w_0$ := $w_0 + \eta \cdot$ error # `Update weight (bias)`
-    - For $j$ := 1 to $n$
-      - $w_j$ := $w_j + \eta \cdot {\rm error} \cdot x_j$ # `Update weight (for each feature)`
+- $w_0$ := $w_0 + \eta \cdot$ error # `Update weight (bias)`
+- For $j$ := 1 to $n$
+  - $w_j$ := $w_j + \eta \cdot {\rm error} \cdot x_j$ # `Update weight (for each feature)`
 
-where the errors were given by $y-\hat{y}$ and $\eta$ was the learning rate. What has this to do with the loss function and the gradient?
+where the errors are given by $y-\hat{y}$ and $\eta$ is the learning rate. What has this to do with the loss function and the gradient?
 
 In fact, for the MSE loss function $L=\frac{1}{n}\sum_{i=1}^n \left(y_i-\hat{y}_i\right)^2$, it is easy to show that
 
-1. $\frac{\partial L}{\partial w_0}=-{\rm error}$, and 
-2. $\frac{\partial L}{\partial w_j}=-{\rm error}\cdot x_j$ , for any other model weight ($j > 0$)
+- $\frac{\partial L}{\partial w_0}=-{\rm error}$, and 
+- $\frac{\partial L}{\partial w_j}=-{\rm error}\cdot x_j$ , for any other model weight ($j > 0$)
 
 Since those expressions correspond precisely to the updates in the pseudo-code, this shows that the pseudo-code is in fact using the MSE loss function and *gradient descent* to update the weights, with $\eta$ as the learning rate. The algorithm is called *stochastic* because the weights are updated after each example is assessed. The alternative is to use *batches of examples* and update weights once per batch. The extreme case of batch processing is to have a single batch containing all examples. In such case the weights are updated only once per epoch.  
 
