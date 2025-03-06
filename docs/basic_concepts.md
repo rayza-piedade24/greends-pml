@@ -1,7 +1,21 @@
+**Overview of Supervised Machine Learning (ML): basic concepts**
+
+In this course we are dealing with data sets of *labeled examples*. Examples can be described by scalar numbers, rows of tabular data, images, etc. For tabular data, we refer the to columns as *explanatory variables* (sometimes also called *independent* or *descriptive* variables).
+
+Labels can be categorical, ordinal or continuous. Labels can be refered to as the *response variable* (or *dependent* variable). They are also called *targets*. Typically, we the problems are called:
+1. *Regression problems*, when the labels are continuous.
+2. *Classification problems*, when the labels are categorical.
+
+The distinction is not always clear. Some problems can be considered either as regression or classification problems.
+
+Given a supervised ML problem, i.e. a set of labeled examples, the goal is to build a function $f$ that maps examples to labels or, in other words, that *predicts* the label from the example.
+
+The outputs of $f$ are called *predictions* or *predicted values*, and the actual labels of the examples are called *actual values* or *target values*.
+
+
 # Models and parameters
 
-
-More formally, if $E$ is the set of examples and $L$ is a set that includes the labels, then what we call the *model* is a family of functions $f_{\rm \bf w}$ that depends on a set of parameters ${\rm \bf w}$: $$f_{\rm \bf w}: E → L.$$
+More formally, if $E$ is the set of examples and ${\rm labels}$ is a set that includes the labels, then what we call the *model* is a family of functions $f_{\rm \bf w}$ that depends on a set of parameters ${\rm \bf w}$ that maps an example into a label: $$f_{\rm \bf w}: E → {\rm labels}.$$
 
 It can be more convenient to express the function as depending on the parameters ${\rm \bf w}$ as well as the example ${\rm \bf x}$. The model's predicted label $\hat{y}$ for the example ${\rm \bf x}$ is:
 
@@ -19,46 +33,60 @@ ML practicioners use an enormous variety of models, depending on the problem at 
 Suppose that our examples are scalar numbers $x_1,\dots, x_n$ and the labels are continuous labels $y_1, \dots, y_n$. We call $x$ the explanatory variable and $y$ the response variable.
 
 Let's consider the simple linear regression model:
-$f_{\rm a,b}(x)= a \, x + b$. The model parameters are ${\rm \bf w}=(a,b)$ and the predicted values are given by 
-$$\hat{y}=f(x; {\rm a,b})=a\, x + b.$$
+$f_{\rm w_0,w_1}(x)= w_0 + w_1 \\, x$. The model parameters are ${\rm \bf w}=(w_0,w_1)$ and the predicted values are given by 
+$$\hat{y}= w_0 + w_1 \\, x.$$
 
-The target  or actual label values are the $y_1, \dots, y_n$, and the predicted label values are the $\hat{y}_1,\dots,\hat{y}_n$.
-
-
+The target  or actual label values are the $y_1, \dots, y_n$, and the predicted label values are 
+$$\hat{y}\_1=f_{\rm w_0,w_1}(x_1),\dots,\hat{y}\_n=f_{\rm w_0,w_1}(x_n).$$
 
 ## Example of a simple model (quadratic regression)
 
 This case is similar to the previous except the model has an additional weight associated to a quadratic term since the model $f_{\rm a,b,c}$ in that example is quadratic instead of linear. This gives increased flexibility to the model. In general the linear model can be extended to a polynomial model of any degree, with the addition of more parameters. This increases flexibility but also increases the risk of overfitting.
 
-$$f_{\rm a,b,c}(x)= f(x;a,b,c)= a \, x^2 + b \, x + c.$$
+$$f_{\rm w_0,w_1,w_2}(x)= w_0 + w_1 \\, x + w_2 \\, x^2.$$
 
+## Multiple linear regression
 
+In most practical cases, there are more than one explanatory variable. For instance, for the Iris data set, we could consider that the explanatory variables are `SepalWidth` ($x_1$),  `PetalLength` ($x_2$) and `PetalWidth` ($x_3$) and the response variable is `SepalLength`  ($y$). The linear regression model is 
+$$\hat{y}=w_0 + w_1 \\, x_1 +  w_2 \\, x_2 + w_3 \\, x_3.$$
+
+<!---
+Note that now $x_1$ represents one explanatory variable. To represent all observations, we typically use a bold notation. So, ${\rm \bf x}_1$ represents all $n$ observations of the variable $x_1$ for the $n$ examples in the data set ($n=150$ for the complete `Iris`data set). In that case the $n$ observations are ${\rm \bf x}\_1$, ${\rm \bf x}\_2$ and ${\rm \bf x}\_3$, and the labels for the $n$ observations are  `SepalLength`  (${\rm \bf y}$), where each symbol at bold represents a *vector* of observations
+-->
+
+## Pseudo-code for linear regression
+
+The following pseudo-code describes a sequence of steps find a good solution for the multiple linear regression problem. We start by reading the $n$ observations. The *hyperparameters* are the *learning rate* and the *number of iterations*. In each iteration the *weights* are updated according to the *error*, i.e. the difference between predicted and actual values of the response variable. The goal of the algorithm is to iteratively reduce the errors by converging to a better set of weights.
+
+---
+  1. Dataset:  $D = {(x_1^{(i)}, ..., x_n^{(i)}, y^{(i)})}\_{i=1}\^n$  `n example, p features`
+  2. Learning rate:  $\eta$ `Small positive value`
+  3. Max iterations: max_iter `Number of epochs`
+  4. Initial weights $w:=(w_0, w_1, ...,w_p)$ `Typically, all zero`
+  5. For ${\rm iter}:=1$ to max_iter: 
+     - For each  $(x_1, ..., x_p, y) \in D$  `Update weights after each example`
+       - $\hat{y}:=w_0 + w_1 \\, x_1 + w_2 \\, x_2 + \dots + w_n \\, x_p$ `Predict response with current weights for the LR model`
+       - error:= $y-\hat{y}$
+       - $w_0:=w_0 + \eta \cdot {\rm error}$ # `Update weight (bias)`
+       - For $j:=1$ to $p$
+         - $w_j:=w_j +\eta \cdot {\rm error} \cdot x_j$ # `Update weight (for each feature)`
+---      
 
 # Loss function for regression
 
-In ML, it is usual to call *loss* to the **dissimilarity** between actual and predicted label values for a *set* of labeled examples.
+In supervised ML, it is usual to call *loss* to the **dissimilarity** between actual and predicted label values for a *set* of labeled examples.
 
-Let ${\rm \bf x}_1, \dots , {\rm \bf x}_n$ be a set of examples with labels $y_1, \dots , y_n$. Let $f_{\rm \bf w}$ be our model. Therefore, the predicted labels are
+Let ${\rm \bf x}\_1, \dots , {\rm \bf x}\_n$ be a set of examples (note that now the index $1,\dots,n$ refers to the example and not to the explanatory variable) with labels $y_1, \dots , y_n$. Let $f_{\rm \bf w}$ be our model. Therefore, the predicted labels are
 
-$$\hat{y}_1=f_{\rm \bf w}({\rm \bf x}_1), \dots, \hat{y}_n=f_{\rm \bf w}({\rm \bf x}_n).$$
+$$\hat{y}\_1=f_{\rm \bf w}({\rm \bf x}\_1), \dots, \hat{y}\_n=f_{\rm \bf w}({\rm \bf x}\_n).$$
 
-The loss over that set of examples is some dissimilarity measure between the actual labels $y_1, \dots , y_n$ and the predicted labels $\hat{y}_1, \dots , \hat{y}_n$.
-
-
+The loss over that set of examples is some dissimilarity measure between the actual labels $y_1, \dots , y_n$ and the predicted labels $\hat{y}\_1, \dots , \hat{y}\_n$.
 
 ## Dissimilarity measures to define *loss*
 
+To define loss, we then need to choose an appropriate dissimilarity metric between a set of actual $y_1, \dots , y_n$ and predicted labels $\hat{y}\_1, \dots , \hat{y}\_n$. The choice depends on the type of problem, and while MAE or MSE are adequate for *regression* problems, other dissimilarities are used for *classification* problems.
 
-To define loss, we then need to choose an appropriate dissimilarity metric between a set of actual $y_1, \dots , y_n$ and predicted labels $\hat{y}_1, \dots , \hat{y}_n$. The choice depends on the type of problem, and while MAE or RMSE are adequate for *regression* problems, other dissimilarities are used for *classification* problems.
-
-
-
-
-## Examples of loss functions for regression problems (MAE, MSE, Huber)
-
-
-
-Above, two common loss functions for regression problems were listed
+For a set of $n$ examples, the following expressions are commonly used to define the loss for a regression problem:
 
 1. Mean absolute error (MAE), given by $\frac{1}{n}\sum_{i=1}^n |y_i-\hat{y}_i|$; or
 
@@ -68,10 +96,7 @@ In the one hand, MAE is not differentiable everywhere, which is an undesirable p
 
 An alternative is called the Huber loss function, which is differentiable everywhere, and behaves like MSE near the origin and like MAE for large $|y_i-\hat{y}_i|$.
 
-
-
-
-# ML as an optimization problem
+## ML as an optimization problem
 
 Now, we can define a ML problem as a optimization problem. Given
 
@@ -79,7 +104,7 @@ Now, we can define a ML problem as a optimization problem. Given
 2. a model $f_{\rm \bf w}$
 3. a *loss* function $L$
 
-the goal is to determine the optimal set of parameters ${\rm \bf w}$ that minimize the loss $L$ over that set of examples.
+The goal is to determine the optimal set of parameters ${\rm \bf w}$ that minimize the loss $L$ over that set of examples. Next, we discuss how in practice ML methods find a solution (the best set of weights) for this problem.
 
 ## Gradient descent and learning rate
 
@@ -113,7 +138,7 @@ Then, the steps of gradient descent algorithm are the following. In ML, one *epo
 
    i) Cumpute $\nabla L({\rm \bf w}^{\star})$
 
-   ii) Update ${\rm \bf w}^{\star}:={\rm \bf w}^{\star} - \eta \, \nabla L({\rm \bf w}^{\star}) $, where $\eta >0 $ is the learning rate.
+   ii) Update ${\rm \bf w}^{\star}:={\rm \bf w}^{\star} - \eta\, \nabla L({\rm \bf w}^{\star}) $, where $\eta >0 $ is the learning rate.
 
 ---
 
@@ -121,30 +146,47 @@ The choice of the *learning rate* is critical for a good performance of the algo
 
 <img src="https://drive.google.com/uc?export=view&id=12c4X3po4-xVGUJKzyKC56lwl4ZEmXqWa" width="400" >
 
+## Stocastich gradient descent for Linear Regression
 
-Let's consider a very simple example, where we try to fit a model to a pairs of observation that are linearly related. Below, we discuss a `PyTroch` gradient descent script for the linear regression problem, and we compare the result with the optimal coefficients obtained by *least squares*. The code below shows how *training loss* is  computed.
+Earlier, we looked at a pseudo-code to solve the multiple linear regression problem iteratively. The weight updates were done with the following steps:
+
+    - $w_0$ := $w_0 + \eta \cdot$ error # `Update weight (bias)`
+    - For $j$ := 1 to $n$
+      - $w_j$ := $w_j + \eta \cdot {\rm error} \cdot x_j$ # `Update weight (for each feature)`
+
+where the errors were given by $y-\hat{y}$ and $\eta$ was the learning rate. What has this to do with the loss function and the gradient?
+
+In fact, for the MSE loss function $L=\frac{1}{n}\sum_{i=1}^n \left(y_i-\hat{y}_i\right)^2$, it is easy to show that
+
+1. $\frac{\partial L}{\partial w_0}=-{\rm error}$, and 
+2. $\frac{\partial L}{\partial w_j}=-{\rm error}\cdot x_j$ , for any other model weight ($j > 0$)
+
+Since those expressions correspond precisely to the updates in the pseudo-code, this shows that the pseudo-code is in fact using the MSE loss function and *gradient descent* to update the weights, with $\eta$ as the learning rate. The algorithm is called *stochastic* because the weights are updated after each example is assessed. The alternative is to use *batches of examples* and update weights once per batch. The extreme case of batch processing is to have a single batch containing all examples. In such case the weights are updated only once per epoch.  
+
+## Computing gradients with PyTorch
+
+Below, we discuss a `PyTroch` gradient descent script for the linear regression problem, and we compare the result with the optimal coefficients obtained by *least squares*. The code below shows how *training loss* is  computed.
 
 The most specific part of the algorithm is the gradient computation. Note that the *gradient machinery* of `PyTorch` is turned-on for each weight with `requires_grad = True` as in the following case:
 
     coeffs=torch.tensor([-20.,-10.]).requires_grad_()
 
-Then, the derivatives can be computed for any continuous function of the weights in tensor `coeffs`. In particular, the *loss* $L$ is defined as a function (that can be arbitrarily complicated) of the weights, and the *gradient* $\nabla L({\rm \bf w}^{*})$ for the current set of weights ${\rm \bf w}^{*}$ is computed with
-
+Then, the derivatives can be computed for any continuous function of the weights in tensor `coeffs`. In particular, the *loss* $L$ is defined as a function (that can be arbitrarily complicated) of the weights, and the *gradient* $\nabla L({\rm \bf w}^{\star})$ for the current set of weights ${\rm \bf w}^{\star}$ is computed with
 
     loss.backward()
-
 
 Finally, the weights are updated with
 
     coeffs.sub_(coeffs.grad * step_size)
 
-where method `sub_` is substraction for weight updating ${\rm \bf w}^{*}:={\rm \bf w}^{*} - \eta \, \nabla L({\rm \bf w}^{*})$, and  the learning rate $\eta$ is called `step_size` in the code.
+where method `sub_` is substraction for weight updating ${\rm \bf w}^{\star}:={\rm \bf w}^{\star} - \eta \\, \nabla L({\rm \bf w}^{\star})$, and  the learning rate $\eta$ is called `step_size` in the code.
 
-Try changing the learning rate to see what happens (try for instance `step_size=0.1`).
+Try changing the learning rate to see what is the result (try for instance `step_size=0.1`).
 
+<details>
+  <summary>Script: gradient descent with PyTorch, train only, stochastic gradient descent</summary>
 
 ```python
-#@title Script for stochastic gradient descent with Pytorch, train only data, applied to synthetic LR data
 # This example illustrates: gradient descent with PyTorch, train only, stochastic gradient descent (SGD)
 import matplotlib.pyplot as plt
 import torch
@@ -217,5 +259,5 @@ plt.plot(training_losses, '-g')
 plt.xlabel('epoch')
 plt.ylabel('loss (MSE)')
 plt.show()
-
 ```
+</details>
