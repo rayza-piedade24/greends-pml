@@ -181,6 +181,8 @@ Finally, the weights are updated with
 
 where method `sub_` is substraction for weight updating ${\rm \bf w}^{\star}:={\rm \bf w}^{\star} - \eta \\, \nabla L({\rm \bf w}^{\star})$, and  the learning rate $\eta$ is called `step_size` in the code.
 
+PyTorch accumulates the gradients on subsequent backward passes, i.e. it accumulates the gradients on every `loss.backward()` call. Since  the update is to be based on the current gradient value, we need to include the `coeffs.grad.zero_()` instruction to zero the gradients before the next pass.
+
 Try changing the learning rate to see what is the result (try for instance `step_size=0.1`).
 
 <details>
@@ -218,7 +220,7 @@ def calc_preds(x):
 
 # Computing MSE loss for one example
 def calc_loss_from_labels(y_pred, y):
-    return torch.mean((y_pred - y) ** 2) # mean applies to a single value in this case
+    return torch.mean((y_pred - y) ** 2) # MSE
 
 # lists to store losses for each epoch
 training_losses = []
@@ -230,7 +232,7 @@ for i in range(iter):
     loss = calc_loss_from_labels(y_pred, y)
     training_losses.append(loss.item())
 
-    # Stochastic Gradient Descent (SGD): update weights after each data point
+    # Stochastic Gradient Descent (SGD): update weights 
     for j in range(X.shape[0]):
         # randomly select a data point
         idx = np.random.randint(X.shape[0])
@@ -250,7 +252,7 @@ for i in range(iter):
         with torch.no_grad():
             coeffs.sub_(coeffs.grad * step_size)
             # zero gradients
-            coeffs.grad.zero_() # PyTorch accumulates the gradients on subsequent backward passes. So, the default action has been set to accumulate (i.e. sum) the gradients on every loss.backward() call.
+            coeffs.grad.zero_() # prevents from accumulating
 
 print('coeffs found by stochastic gradient descent:', coeffs.detach().numpy())
 
