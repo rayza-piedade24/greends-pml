@@ -169,10 +169,11 @@ Video suggestion: [Backpropagation by Patrick Loeber](https://www.youtube.com/wa
 
 In the following examples, one starts with a step by step code in Python for the linear regression model  that is based on our knowledge of  the gradient expression for the MSE loss function and we convert it into a Pytorch code that can be easily generalized to other models and other loss functions.
 
-Video suggestion: [Gradient Descent with Autograd and Backpropagation by Patrick Loeber](https://www.youtube.com/watch?v=E-I2DNVzQLg). The author first uses `numpy` to create a gradient descent script for a  linear regression model and then replaces the manual gradient calculation by `PyTorch` automatic gradient calculation:
+Video suggestion: [Gradient Descent with Autograd and Backpropagation by Patrick Loeber](https://www.youtube.com/watch?v=E-I2DNVzQLg). The author first uses `numpy` to create a gradient descent script for a  linear regression model and then replaces the manual gradient calculation by `PyTorch` automatic gradient calculation. The following scripts illustrate the possibilities to move from a low level Python code to a higher level PyTorch code for the simple Linear Regression problem. The higher-level code can be easily adapted to more complex models and other optimizers.
 
 - [numpy version](https://github.com/patrickloeber/pytorchTutorial/blob/master/05_1_gradientdescent_manually.py)
 - [torch version](https://github.com/patrickloeber/pytorchTutorial/blob/master/05_2_gradientdescent_auto.py)
+- [torch version with torch loss criterion and optimizer](https://github.com/patrickloeber/pytorchTutorial/blob/master/07_linear_regression.py)
 
 <!---
 
