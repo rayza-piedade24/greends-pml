@@ -81,8 +81,19 @@ The goal of the following classes is to understand how ML models can be trained 
 <details markdown="block">
 <summary> Basic concepts (Mar 7, 2025): SGD, forward pass, backward pass, backpropagation, PyTorch, optimizer, ... </summary>
 
+- Revise solutions for the problems listed in the previous class.
 - See [Basic concepts notebook](docs/basic_concepts.md).
-- 
+- Backpropagation. Video suggestion: [Backpropagation by Patrick Loeber](https://www.youtube.com/watch?v=3Kb0QS6z7WA&list=PLqnslRFeH2UrcDBWF5mfPGpqQDSta6VK4&index=4). The author explains what is a computation graph and how PyTorch uses it to compute gradients. The example uses a very simple model: $\hat{y}=w \cdot x$ and the MSE loss which is just $(\hat{y}-y)\^2$.
+- Pipeline for the regression problem:
+  - Prepare data
+  - Design model (input, output size, model)
+  - Construct loss and optimizer
+  - Training loop
+    - Forward pass: prediction and loss
+    - Backward pass: gradients
+    - Update weights
+- `PyTorch` pipeline: loss, optimizer. See [script by Patrick Loeber](https://github.com/patrickloeber/pytorchTutorial/blob/master/07_linear_regression.py).
+- Description of assignment #1
 </details>
 
 --- 
