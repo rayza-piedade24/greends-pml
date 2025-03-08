@@ -123,7 +123,7 @@ This  is given by the gradient of $L$ with respect to ${\rm \bf w}$ at ${\rm \bf
 
 $$\nabla L({\rm \bf w}^{\star}) = \frac{\partial L}{\partial \rm \bf w}({\rm \bf w}^{\star})= \left(\frac{\partial L}{\partial \rm w_1}({\rm \bf w}^{\star}), \dots,  \frac{\partial L}{\partial \rm w_m}({\rm \bf w}^{\star}) \right).$$
 
-The computation of $\nabla L({\rm \bf w}^{\star})$ is usually done by **back-propagation**, which is an automatic differentiation algorithm for calculating gradients for the weights in a neural network graph structure. Back-propagation (aka *backprop*) is an automatic differentiation algorithm that applies the *chain-rule*.
+The computation of $\nabla L({\rm \bf w}^{\star})$ is usually done by **back-propagation**, which is an automatic differentiation algorithm for calculating gradients for the weights in a computational graph. Back-propagation (aka *backprop*) is an automatic differentiation algorithm that applies the *chain-rule*.
 
 The vector $\nabla L({\rm \bf w}^{\star})$ points to the direction from ${\rm \bf w}^{\star}$ along which $L$ grows faster, so gradient descent follows the opposite direction $-\nabla L({\rm \bf w}^{\star})$.
 
