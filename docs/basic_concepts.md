@@ -1,5 +1,8 @@
 **Basic concepts of supervised machine learning**
 
+
+
+
 In this course we are dealing with data sets of *labeled examples*. Examples can be described by scalar numbers, rows of tabular data, images, etc. For tabular data, we refer the to columns as *explanatory variables* (sometimes also called *independent* or *descriptive* variables).
 
 Labels can be categorical, ordinal or continuous. Labels can be refered to as the *response variable* (or *dependent* variable). They are also called *targets*. Typically, we the problems are called:
@@ -174,6 +177,20 @@ Video suggestion: [Gradient Descent with Autograd and Backpropagation by Patrick
 - [numpy version](https://github.com/patrickloeber/pytorchTutorial/blob/master/05_1_gradientdescent_manually.py)
 - [torch version](https://github.com/patrickloeber/pytorchTutorial/blob/master/05_2_gradientdescent_auto.py)
 - [torch version with torch loss criterion and optimizer](https://github.com/patrickloeber/pytorchTutorial/blob/master/07_linear_regression.py)
+
+The following table illustrates the changes from a basic Python script which is dependent on the model, loss, etc,  to a PyTorch higher-level script that can easily generalized to other models, loss functions and optimizer strategies.
+
+| Basic Python | PyTorch 
+|---|---
+| Define model explicitly | Use a pre-defined model
+|`def predict(x):`|`torch.nn.Linear(in_size,out_size)`
+| Define loss explicitly | Use a pre-defined loss function
+|`def loss(y,y_pred):`|`loss=torch.nn.MSEloss(y,y_pred)`
+| Loss optimization strategy | Use a pre-defined optimizer
+| | `optimizer=torch.optim.SGD(params, learn_rate)`
+| Compute *ad hoc* gradient | **Use built-in backpropagation mechanism**
+|`def gradient(x,y,y_pred):`|`loss.backward()`
+|Update weights explicitly| `optimizer.step()`
 
 <!---
 
