@@ -93,6 +93,20 @@ The goal of the following classes is to understand how ML models can be trained 
     - Backward pass: gradients
     - Update weights
 - `PyTorch` pipeline: loss, optimizer. See [script by Patrick Loeber](https://github.com/patrickloeber/pytorchTutorial/blob/master/07_linear_regression.py).
+- The following table illustrates the changes from a basic Python script which is dependent on the model, loss, etc,  to a PyTorch higher-level script that can easily generalized to other models, loss functions or optimizer strategies.
+
+| Basic Python | PyTorch 
+|---|---
+| Define model explicitly | Use a pre-defined model
+|`def predict(x):`|`torch.nn.Linear(in_size,out_size)`
+| Define loss explicitly | Use a pre-defined loss function
+|`def loss(y,y_pred):`|`loss=torch.nn.MSEloss(y,y_pred)`
+| Loss optimization strategy | Use a pre-defined optimizer
+| | `optimizer=torch.optim.SGD(params, learn_rate)`
+| Compute *ad hoc* gradient | **Use built-in backpropagation mechanism**
+|`def gradient(x,y,y_pred):`|`loss.backward()`
+|Update weights explicitly| `optimizer.step()`
+
 - Description of assignment #1
 </details>
 
