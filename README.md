@@ -39,7 +39,7 @@ The goal of the first class is to give an introduction to ML and also to show so
 The goal of the following classes is to understand how ML models can be trained in and used to solve regression and classification problems. We start by applying the machine learning approach to well-known statistical problems like linear regression to illustrate the stepwise approach followed in ML. We use synthetic data generated from a linear or quadratic regression, where one can control the underlying model and the amout of noise. Then, we consider the  `Iris` tabular data set with 4 explanatory variables and categorical label that can be one of three species.
 
 - Video on the Perceptron and early times of AI [The First Neural Networks](https://www.youtube.com/watch?v=e5dVSygXbAE&t=88s)
-- Basic concepts in Machine learning: *model*, *fit*, *epochs*, *loss*, *learning rate*, *perceptron*, parameters *weights*, for a simple regression problem. See [Basic concepts notebook](docs/basic_concepts.md).
+- Basic concepts in Machine learning: *model*, *fit*, *epochs*, *loss*, *learning rate*, *perceptron*, parameters *weights*, for a simple regression problem. See [Basic concepts notebook](docs/T1_basic_concepts.md).
 - Consider the following pseudo-code to train a simple Linear Regression model. What is the *loss* function that we aim at minimizing? What is the strategy to reduce the *loss* in each iteration? Is there a risk of *over-fitting*?
   
   ---
@@ -82,7 +82,7 @@ The goal of the following classes is to understand how ML models can be trained 
 <summary> Basic concepts (Mar 7, 2025): SGD, forward pass, backward pass, backpropagation, PyTorch, optimizer, ... </summary>
 
 - Revise solutions for the problems listed in the previous class.
-- See [Basic concepts notebook](docs/basic_concepts.md).
+- See [Basic concepts notebook](docs/T1_basic_concepts.md).
 - Backpropagation. Video suggestion: [Backpropagation by Patrick Loeber](https://www.youtube.com/watch?v=3Kb0QS6z7WA&list=PLqnslRFeH2UrcDBWF5mfPGpqQDSta6VK4&index=4). The author explains what is a computation graph and how PyTorch uses it to compute gradients. The example uses a very simple model: $\hat{y}=w \cdot x$ and the MSE loss which is just $(\hat{y}-y)\^2$.
 - Pipeline for the regression problem:
   - Prepare data
