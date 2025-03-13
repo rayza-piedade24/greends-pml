@@ -79,7 +79,7 @@ The goal of the following classes is to understand how ML models can be trained 
 </details>
 
 <details markdown="block">
-<summary> Basic concepts (Mar 7, 2025): SGD, forward pass, backward pass, backpropagation, PyTorch, optimizer, ... </summary>
+<summary> Backpropagation (Mar 7, 2025): SGD, forward pass, backward pass, PyTorch, optimizer, ... </summary>
 
 - Revise solutions for the problems listed in the previous class.
 - See [Basic concepts notes](docs/T1_basic_concepts.md).
@@ -112,12 +112,13 @@ The goal of the following classes is to understand how ML models can be trained 
 </details>
 
 <details markdown="block">
-<summary> Basic concepts (Mar 14, 2025): Decision trees, entropy, over-fitting, train and development </summary>
+<summary> Decision trees (Mar 14, 2025): entropy, over-fitting, train and development </summary>
 
 - See [Decision tree notes](docs/T2_decision_trees_overfitting_train_test.md)
 - How to grow a decision tree
 - Whats is entropy and how does it help us to find the best model? 
 - The risk of over-fitting: train and development sets
+- Decision tree hyper-parameters
 
 </details>
 
@@ -309,7 +310,7 @@ Similarly to the first session (*Introduction*) where we discussed a short scrip
 </details>
 
 <details markdown="block">
-<summary> Model evaluation and hyperparameter tuning (June 7, 2024); K-fold cross-validation, grid search, ROC curve and AUC </summary>
+<summary> Model evaluation and hyper-parameter tuning (June 7, 2024); K-fold cross-validation, grid search, ROC curve and AUC </summary>
 
 For the following topics, see Chap 6 notebook at [https://github.com/rasbt/machine-learning-book/](https://github.com/rasbt/machine-learning-book/) and corresponding sections in the [Overview notebook](https://github.com/isa-ulisboa/greends-pml/blob/main/ML_overview_with_examples.ipynb).
 - Using k-fold cross-validation to assess model performance;
