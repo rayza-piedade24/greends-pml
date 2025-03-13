@@ -82,7 +82,7 @@ The goal of the following classes is to understand how ML models can be trained 
 <summary> Basic concepts (Mar 7, 2025): SGD, forward pass, backward pass, backpropagation, PyTorch, optimizer, ... </summary>
 
 - Revise solutions for the problems listed in the previous class.
-- See [Basic concepts notebook](docs/T1_basic_concepts.md).
+- See [Basic concepts notes](docs/T1_basic_concepts.md).
 - Backpropagation. Video suggestion: [Backpropagation by Patrick Loeber](https://www.youtube.com/watch?v=3Kb0QS6z7WA&list=PLqnslRFeH2UrcDBWF5mfPGpqQDSta6VK4&index=4). The author explains what is a computation graph and how PyTorch uses it to compute gradients. The example uses a very simple model: $\hat{y}=w \cdot x$ and the MSE loss which is just $(\hat{y}-y)\^2$.
 - Pipeline for the regression problem:
   - Prepare data
@@ -108,6 +108,17 @@ The goal of the following classes is to understand how ML models can be trained 
 |Update weights explicitly| `optimizer.step()`
 
 - Description of assignment #1
+
+</details>
+
+<details markdown="block">
+<summary> Basic concepts (Mar 14, 2025): Decision trees, entropy, over-fitting, train and development </summary>
+
+- See [Decision tree notes](docs/T2_decision_trees_overfitting_train_test.md)
+- How to grow a decision tree
+- Whats is entropy and how does it help us to find the best model? 
+- The risk of over-fitting: train and development sets
+
 </details>
 
 --- 
