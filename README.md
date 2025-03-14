@@ -117,9 +117,10 @@ The goal of the following classes is to understand how ML models can be trained 
 - See [Decision tree notes](docs/T2_decision_trees_overfitting_train_test.md)
 - See (Raschka et al, 2022), pg 86-98.
 - How to grow a decision tree
-- What is entropy and how does it help us to find the best model? 
+- What is entropy and how does it help us to find the best model? Check  the Princeton video on [Information Theory Basics](https://www.youtube.com/watch?v=bkLHszLlH34).
 - The risk of over-fitting: train and development sets
 - Decision tree hyper-parameters
+- Exercise: create a decision tree for the [Soil detection for cotton crop problem](https://www.kaggle.com/datasets/zohasohail/soil-detection-for-cotton-crop) and determine the best values for hyper-parameters Maximum depth of the tree and Minimum leaf size.
 </details>
 
 --- 
