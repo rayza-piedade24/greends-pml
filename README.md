@@ -115,13 +115,12 @@ The goal of the following classes is to understand how ML models can be trained 
 <summary> Decision trees (Mar 14, 2025): entropy, over-fitting, train and development </summary>
 
 - See [Decision tree notes](docs/T2_decision_trees_overfitting_train_test.md)
+- See (Raschka et al, 2022), pg 86-98.
 - How to grow a decision tree
-- Whats is entropy and how does it help us to find the best model? 
+- What is entropy and how does it help us to find the best model? 
 - The risk of over-fitting: train and development sets
 - Decision tree hyper-parameters
-
 </details>
-
 --- 
 # Other resources
 
