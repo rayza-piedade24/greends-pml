@@ -6,7 +6,7 @@ Examples can also be tabular data, where each example is described by a numeric 
 
 The example below shows a decision tree for the iris data set. The root node represents the 4-dimensional space defined by the variables sepal length,sepal width, petal length, petal width. This is a 3-class problem where labels are the varieties setosa, versicolor, virginica.
 
-We call depth of the decision tree to the maximum number of splits to define a leaf node. Note that the code establishes max_depth=4 to prevent the tree from growing more than 4 levels. The figure indicates the number of examples (or training samples) that lie in each node of the tree. Code to run in Colab
+We call depth of the decision tree to the maximum number of splits to define a leaf node. Note that the code establishes `max_depth=4` to prevent the tree from growing more than 4 levels. The figure indicates the number of examples (or training samples) that lie in each node of the tree. Code to run in Colab
 
 <details markdown="block">
 <summary> Basic decision tree classifier, plot tree (sklearn) </summary>
@@ -40,9 +40,9 @@ We call depth of the decision tree to the maximum number of splits to define a l
 To build a tree, several questions arise:
 1. Which feature should be tested at a node?
 2. When should a node be declared a *leaf*?
-3. If the tree becomes 'too large' how can it be made smaller and simpler (pruning)?
 4. If a leaf node is impure, how should the category label be assigned?
 5. How should be missing data handled?
+6. If the tree becomes 'too large' how can it be made smaller and simpler (pruning)?
 
 To answer to those questions, we first need to define a measure of the quality of the model. As before, one defines a *loss* for a decision tree since the  ultimate goal is to find the model with the lowest loss.
 
@@ -58,8 +58,10 @@ $$\hat{p_1}=\frac{n_1}{n},\dots,\hat{p_c}=\frac{n_c}{n},$$
 
 where $n$ is the total number of examples at the node. For classification trees, the `DecisionTreeClassifier` class in `scikit-learn` uses one of the following criteria:
 
-1. `gini`: This is the default criterion and it measures the impurity of a set of samples as the probability of misclassifying a randomly chosen element from the set. The *loss* is given by  $G = 1 - \sum_{i=1}^n p_i^2$, where $\hat{p}_i$ is the estimated probability of belonging to the $i$th class.
-2. `entropy`: This criterion measures the impurity of a set of samples as the amount of information gained about the label from observing the features that define the node. The *loss* is given by $E=-\sum_{i=1}^n \hat{p}_i \log_2 \hat{p}_i$.
+1. `gini`: This is the default criterion and it measures the impurity of a set of samples as the probability of misclassifying a randomly chosen element from the set. The Gini *loss* for a node of the tree is given by  $G = 1 - \sum_{i=1}^n \hat{p_i}^2$, where $\hat{p_i}$ is the estimated probability of belonging to the *i*-th class.
+2. `entropy`: Entropy is a fundamental concept in machine learning that measures the level of disorder or uncertainty in a dataset. A higher entropy value indicates a more heterogeneous dataset with diverse classes, while a lower entropy signifies a more homogeneous and predictable  subset of data. It ranges from 0 to 1, with higher values indicating greater uncertainty. The entropy *loss* for a node of the tree is given by $E=-\sum_{i=1}^n \hat{p}_i \log_2 \hat{p}_i$.
+
+See for instance this [A Simple Explanation of Information Gain and Entropy](https://victorzhou.com/blog/information-gain/) and the Princeton video on [Information Theory Basics](https://www.youtube.com/watch?v=bkLHszLlH34).
 
 Both measures range from 0 (minimum impurity, maximum certainty) to some maximum value (maximum impurity, minimum certainty). For instance, for a 2-class problem, maximum impurity is reached when $p_1=p_2=0.5$, where
 
@@ -76,7 +78,7 @@ For the two loss function above (`entropy` and `gini`), it is guaranteed that th
 
 ## Choosing the possible splits
 
-For continuous explanatory variables, all $n$ examples are ordered for the  $j$th feature:
+For continuous explanatory variables, all $n$ examples are ordered for the  *j*-th feature:
 
 $$x_{j(1)} \le x_{j(2)} \dots \le  x_{j(n)}.$$
 
@@ -87,7 +89,7 @@ Initialize $L$ as an empty list
 
 For $j=1,\dots,k$
 
-$~~~~$ For $ i = 1, \dots n$,
+$~~~~$ For $i=1, \dots n$,
 
 $~~~~$ $~~~~$ Consider the split $x_j \le x_{j(i)}$, compute its loss decrease and append it to $L$.
 
@@ -97,9 +99,9 @@ The best split is the split $x_j \le x_{j(i)}$ which has the lowest value in $L$
 
 
 
-For categorical explanatory variables, when there is no order along values, in principle all 2m combinations of the m distinct values that the variable can take should be considered as possible splits.
+For categorical explanatory variables, when there is no order along values, in principle all $2^m$ combinations of the $m$ distinct values that the variable can take should be considered as possible splits.
 
-## Regularization and prunning
+## Overfitting and regularization
 
 Decision trees are prone to *overfitting* since that if they grow enough they can approximate any decison rule with arbitrary precision. Therefore, there are different techniques to prevent decision trees of being  too large.
 
@@ -108,19 +110,25 @@ Decision trees are prone to *overfitting* since that if they grow enough they ca
   - Minimum leaf size, i.e., minimum number of examples that lie in a leaf (e.g. 3);
   - Maximum number of nodes (e.g. 20).
 
+See all hyper-parameters for [sklearn.tree.DecisionTreeClassifier](https://scikit-learn.org/stable/modules/generated/sklearn.tree.DecisionTreeClassifier.html).
+
 2. Pruning. This is a regularization technique that consists on pruning the full grown tree to reduce its size. Pruning can be achieved by:
   - Adding a regularization hyper-parameter to the loss function, like $\alpha(|T|)$ where $\alpha$ is a function of the size (number of leaves) of the tree $T$. If one uses $L_\alpha=L+\alpha$ (consider that $\alpha >0$) instead of $L$ to determine the *loss*, then spliting a node might possibly cause an increase of $L_\alpha$.  If two leaves are pure and have the same label, aggregating them will lower $L_\alpha$ for $\alpha>0$. Pruning aggregates leaf nodes if that reduces $L_\alpha$.
   - Predicting a validation data set with the decision tree. Pruning consists of aggregating leaf nodes if that aggregation increases validation accuracy.
 
+See [Accuracy vs alpha for training and testing sets](https://scikit-learn.org/stable/auto_examples/tree/plot_cost_complexity_pruning.html) for a detailed analysis on how to estimate the optimal regularization parameter $\alpha$ using train and developments data sets. 
+
 [This script](https://github.com/isa-ulisboa/greends-pml/blob/main/notebooks/prune_decision_tree.ipynb) illustrates how a tree can be pruned. The `prune_index` function is recursive.
 
-## Decision tree bias and variance
+## Choosing the best hyper-parameter values for a decision tree with a bias and variance plot
+
+When fitting a decision tree, one practical problem that arises is choosing the best values for the hyper-paramenters like `max_depth`. Using solely the training set does not make sense since this would lead to over-fitting. Therefore, this choice should rely on a development data set. To make the most informed decision one should take into account not just the average precision of the decision tree over the development data set but also its variance. Plotting the *bias* and *variance* of the model for a range of values of the hyper-parameter is a useful technique to decide on the best hyper-parameter value to use. 
 
 **Bias** measures how much the predictions of a model differ from the true values. **Variance** measures how much the predictions of a model differ from each other. One possible technique to estimate  bias and variance is **cross-validation**.
 
 In general, cross-validation is a technique used to evaluate the performance of a machine learning model. It involves splitting the dataset into multiple subsets, training the model on some of them, and testing it on the remaining subsets. This allows us to estimate the performance of the model on new, unseen data.
 
-[This script](https://github.com/isa-ulisboa/greends-pml/blob/main/notebooks/decision_tree_validation_curve.ipynb) relies on `validation_curve` from `scikit-learn` to estimate bias and variance of a classification model. In fact, the code applies a family of models (decision trees) that depend on the hyper-parameter `max_depth`.  Note that the synthetic data set is generated by `make_classification`. The output plot shows clearly the issua of **over-fitting** since the estimated *train* accuracy keeps growing with the depth of the tree. However, the *validation* accuracy stabilizes for when the hyper-parameter `max_depth` is larger than 6. For this example, *bias* and *variance* are estimated from the validation scores. For instance, for the model with `max_depth=4`, the estimated bias is $\approx 0.013$, which corresponds to an estimated 87% accuracy, while the estimated variance is $\approx 0.0004$, which is the plotted standard deviation ($\approx 0.02$) squared.
+[This script](https://github.com/isa-ulisboa/greends-pml/blob/main/notebooks/decision_tree_validation_curve.ipynb) relies on `validation_curve` from `scikit-learn` to estimate bias and variance of a classification model. In fact, the code applies a family of models (decision trees) that depend on the hyper-parameter `max_depth`.  Note that the synthetic data set is generated by `make_classification`. The output plot shows clearly the issua of **overfitting** since the estimated *train* accuracy keeps growing with the depth of the tree. However, the *validation* accuracy stabilizes for when the hyper-parameter `max_depth` is larger than 6. For this example, *bias* and *variance* are estimated from the validation scores. For instance, for the model with `max_depth=4`, the estimated bias is $\approx 0.013$, which corresponds to an estimated 87% accuracy, while the estimated variance is $\approx 0.0004$, which is the plotted standard deviation ($\approx 0.02$) squared.
 
 Suggestion: try the code above using the `gini` instead of the `entropy` criterion for spliting.
 
