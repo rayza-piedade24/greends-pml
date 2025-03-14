@@ -121,7 +121,9 @@ The goal of the following classes is to understand how ML models can be trained 
 - The risk of over-fitting: train and development sets
 - Decision tree hyper-parameters
 </details>
+
 --- 
+
 # Other resources
 
 <details markdown="block">
