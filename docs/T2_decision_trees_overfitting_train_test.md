@@ -1,8 +1,9 @@
-So far all ''from scratch'' examples above (simple linear regression, quadratic regression) dealt with *scalar* inputs, i.e. each example was described by a single number.
 
-Examples can also be tabular data, where each example is described by a numeric vector. Formally, the $i$-th example is described by a vector  $(x_{i1}, \dots, x_{ik})$ of length $k$, for examples $i = 1, \dots, n$ and labels are $y_1, \dots,  y_n$  as before.
+In the topics below, we consider that examples are of tabular type, where each example is described by a numeric vector. Formally, the $i$-th example is described by a vector  $(x_{i1}, \dots, x_{ik})$ of length $k$, for examples $i = 1, \dots, n$ and labels are $y_1, \dots,  y_n$  as before. Non-numerical attributes can be in principle converted into numerical ones so that assumption holds.
 
 # Decision trees
+
+This is a model for classification, where labels are categories. The goal, as for other ML models, is to be able to predict the label of a new example from its features (explanatory variables). The first example uses  the known Iris data set.
 
 The example below shows a decision tree for the iris data set. The root node represents the 4-dimensional space defined by the variables sepal length,sepal width, petal length, petal width. This is a 3-class problem where labels are the varieties setosa, versicolor, virginica.
 
@@ -110,15 +111,13 @@ Decision trees are prone to *overfitting* since that if they grow enough they ca
   - Minimum leaf size, i.e., minimum number of examples that lie in a leaf (e.g. 3);
   - Maximum number of nodes (e.g. 20).
 
-See all hyper-parameters for [sklearn.tree.DecisionTreeClassifier](https://scikit-learn.org/stable/modules/generated/sklearn.tree.DecisionTreeClassifier.html).
+See all hyper-parameters for [`sklearn.tree.DecisionTreeClassifier`](https://scikit-learn.org/stable/modules/generated/sklearn.tree.DecisionTreeClassifier.html).
 
 2. Pruning. This is a regularization technique that consists on pruning the full grown tree to reduce its size. Pruning can be achieved by:
   - Adding a regularization hyper-parameter to the loss function, like $\alpha(|T|)$ where $\alpha$ is a function of the size (number of leaves) of the tree $T$. If one uses $L_\alpha=L+\alpha$ (consider that $\alpha >0$) instead of $L$ to determine the *loss*, then spliting a node might possibly cause an increase of $L_\alpha$.  If two leaves are pure and have the same label, aggregating them will lower $L_\alpha$ for $\alpha>0$. Pruning aggregates leaf nodes if that reduces $L_\alpha$.
   - Predicting a validation data set with the decision tree. Pruning consists of aggregating leaf nodes if that aggregation increases validation accuracy.
 
-See [Accuracy vs alpha for training and testing sets](https://scikit-learn.org/stable/auto_examples/tree/plot_cost_complexity_pruning.html) for a detailed analysis on how to estimate the optimal regularization parameter $\alpha$ using train and developments data sets. 
-
-[This script](https://github.com/isa-ulisboa/greends-pml/blob/main/notebooks/prune_decision_tree.ipynb) illustrates how a tree can be pruned. The `prune_index` function is recursive.
+See [Post pruning decision trees with cost complexity pruning of Scikit Learn](https://scikit-learn.org/stable/auto_examples/tree/plot_cost_complexity_pruning.html) for a detailed analysis on how to estimate the optimal regularization parameter $\alpha$ using train and developments data sets. 
 
 ## Choosing the best hyper-parameter values for a decision tree with a bias and variance plot
 
