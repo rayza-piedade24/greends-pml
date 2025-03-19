@@ -1,8 +1,9 @@
-# General Information for  PML
-Links and exercises for the course Practical Machine Learning, Green Data Science, 2o semester 2024/2025
+# Links and exercises for the course Practical Machine Learning, Green Data Science, 2o semester 2024/2025
 
 ---
-Instructor: Manuel Campagnolo, ISA/ULisboa
+Instructor: Manuel Campagnolo, ISA/ULisboa (mlc@isa.ulisboa.pt)
+
+Teaching assistant: Dominic Welsh (djwelsh@edu.ulisboa.pt)
 
 The course will follow a mixed flipped classroom model, where students are supposed to work on suggested topics autonomously before classes. Work outside class will be based on a range of Machine Learning resources including the book *Sebastian Raschka, Yuxi (Hayden) Liu, and Vahid Mirjalili. Machine Learning with PyTorch and Scikit-Learn. Packt Publishing, 2022*. During classes, Python notebooks will be run on Google Colab.
 
@@ -25,6 +26,7 @@ Each description below includes the summary of the topics covered in the session
 
 The goal of the first class is to give an introduction to ML and also to show some of the problems that can be addressed with the techniques and tools that will be discussed during the semester. The examples will be run on Colab.
 
+- See (Raschka et al, 2022), Chapter 1: Giving Computers the Ability to Learn from Data
 - Types of machine learning problems: supervised learning, unsupervised learning, reinforcement learning. Suggestion: check video [Types of machine learning](https://www.youtube.com/watch?v=gh6mNF2BGvk)
 - Supervised learning: classification vs regression 
 - Examples of input data for machine learning problems: tabular data, images, text. See *Iris data set* example with the notebook [iris_regression_classification.ipynb](https://github.com/isa-ulisboa/greends-pml/blob/main/iris_regression_classification.ipynb)
@@ -38,6 +40,7 @@ The goal of the first class is to give an introduction to ML and also to show so
 
 The goal of the following classes is to understand how ML models can be trained in and used to solve regression and classification problems. We start by applying the machine learning approach to well-known statistical problems like linear regression to illustrate the stepwise approach followed in ML. We use synthetic data generated from a linear or quadratic regression, where one can control the underlying model and the amout of noise. Then, we consider the  `Iris` tabular data set with 4 explanatory variables and categorical label that can be one of three species.
 
+- See (Raschka et al, 2022), Chapter 2: Training Simple Machine Learning Algorithms for Classification
 - Video on the Perceptron and early times of AI [The First Neural Networks](https://www.youtube.com/watch?v=e5dVSygXbAE&t=88s)
 - Basic concepts in Machine learning: *model*, *fit*, *epochs*, *loss*, *learning rate*, *perceptron*, parameters *weights*, for a simple regression problem. See [Basic concepts notebook](docs/T1_basic_concepts.md).
 - Consider the following pseudo-code to train a simple Linear Regression model. What is the *loss* function that we aim at minimizing? What is the strategy to reduce the *loss* in each iteration? Is there a risk of *over-fitting*?
@@ -81,6 +84,7 @@ The goal of the following classes is to understand how ML models can be trained 
 <details markdown="block">
 <summary> Backpropagation (Mar 7, 2025): SGD, forward pass, backward pass, PyTorch, optimizer, ... </summary>
 
+- See (Raschka et al, 2022), Chapter 2: Training Simple Machine Learning Algorithms for Classification
 - Revise solutions for the problems listed in the previous class.
 - See [Basic concepts notes](docs/T1_basic_concepts.md).
 - Backpropagation. Video suggestion: [Backpropagation by Patrick Loeber](https://www.youtube.com/watch?v=3Kb0QS6z7WA&list=PLqnslRFeH2UrcDBWF5mfPGpqQDSta6VK4&index=4). The author explains what is a computation graph and how PyTorch uses it to compute gradients. The example uses a very simple model: $\hat{y}=w \cdot x$ and the MSE loss which is just $(\hat{y}-y)\^2$.
@@ -114,8 +118,8 @@ The goal of the following classes is to understand how ML models can be trained 
 <details markdown="block">
 <summary> Decision trees (Mar 14, 2025): entropy, over-fitting, train and development </summary>
 
+- See (Raschka et al, 2022), Chapter 3: Decision tree learning (pg 86-98.)
 - See [Decision tree notes](docs/T2_decision_trees_overfitting_train_test.md)
-- See (Raschka et al, 2022), Chapter 3, pg 86-98.
 - How to grow a decision tree
 - What is entropy and how does it help us to find the best model? Check  the Princeton video on [Information Theory Basics](https://www.youtube.com/watch?v=bkLHszLlH34).
 - The risk of over-fitting: train and development sets
@@ -130,7 +134,7 @@ The goal of the following classes is to understand how ML models can be trained 
 | Data set | train only | train and development
 | Hyperparameters | learning rate, number iterations | tree depth, leaf size, ...
 | Risk of over-fitting | very low | very high
-| Loss function | $MSE=\frac{1}{n}\sum_{i=1}^n \left(y_i-\hat{y}_i\right)^2$ | entropy $E=-\sum_{i=1}^n \hat{p}_i \log_2 \hat{p}_i$
+| Loss function | $MSE=\frac{1}{n}\sum_{i=1}^n \left(y_i-\hat{y}_i\right)^2$ | entropy:  $H({\rm \bf p})=-\sum_{i=1}^n \hat{p}_i \log_2 \hat{p}_i$
 | Optimization | backpropagation (SGD) | brute force (try all features and all thresholds)
 | Python package | PyTorch | scikit learn
 
