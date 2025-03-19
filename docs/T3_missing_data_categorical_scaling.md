@@ -2,6 +2,10 @@
 
 - [sklearn missing values support](https://scikit-learn.org/stable/modules/tree.html#missing-values-support)
 
+- [pipelines](https://scikit-learn.org/stable/modules/compose.html#pipeline)
+
+- [transforming targets: example](https://scikit-learn.org/stable/auto_examples/compose/plot_transformed_target.html#sphx-glr-auto-examples-compose-plot-transformed-target-py)
+
 <details markdown="block">
 <summary> Example with the Iris data set </summary>
 
