@@ -130,7 +130,7 @@ The goal of the following classes is to understand how ML models can be trained 
 | Data set | train only | train and development
 | Hyperparameters | learning rate, number iterations | tree depth, leaf size, ...
 | Risk of over-fitting | very low | very high
-| Loss function | MSE=$\\sum\_{i=1}\^n (y\_i-\\hat{y\_i})\^2$ | entropy
+| Loss function | $MSE=\frac{1}{n}\sum_{i=1}^n \left(y_i-\hat{y}_i\right)^2$ | entropy $E=-\sum_{i=1}^n \hat{p}_i \log_2 \hat{p}_i$
 | Optimization | backpropagation (SGD) | brute force (try all features and all thresholds)
 | Python package | PyTorch | scikit learn
 
