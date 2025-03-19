@@ -86,7 +86,7 @@ The goal of the following classes is to understand how ML models can be trained 
 - Backpropagation. Video suggestion: [Backpropagation by Patrick Loeber](https://www.youtube.com/watch?v=3Kb0QS6z7WA&list=PLqnslRFeH2UrcDBWF5mfPGpqQDSta6VK4&index=4). The author explains what is a computation graph and how PyTorch uses it to compute gradients. The example uses a very simple model: $\hat{y}=w \cdot x$ and the MSE loss which is just $(\hat{y}-y)\^2$.
 - Pipeline for the regression problem:
   - Prepare data
-  - Design model (input, output size, model)
+  - Design model (input, output size, model: perceptron)
   - Construct loss and optimizer
   - Training loop
     - Forward pass: prediction and loss
@@ -102,7 +102,7 @@ The goal of the following classes is to understand how ML models can be trained 
 | Define loss explicitly | Use a pre-defined loss function
 |`def loss(y,y_pred):`|`loss=torch.nn.MSEloss(y,y_pred)`
 | Loss optimization strategy | Use a pre-defined optimizer
-| | `optimizer=torch.optim.SGD(params, learn_rate)`
+| Code explicitly| `optimizer=torch.optim.SGD(params, learn_rate)`
 | Compute *ad hoc* gradient | **Use built-in backpropagation mechanism**
 |`def gradient(x,y,y_pred):`|`loss.backward()`
 |Update weights explicitly| `optimizer.step()`
@@ -115,12 +115,58 @@ The goal of the following classes is to understand how ML models can be trained 
 <summary> Decision trees (Mar 14, 2025): entropy, over-fitting, train and development </summary>
 
 - See [Decision tree notes](docs/T2_decision_trees_overfitting_train_test.md)
-- See (Raschka et al, 2022), pg 86-98.
+- See (Raschka et al, 2022), Chapter 3, pg 86-98.
 - How to grow a decision tree
 - What is entropy and how does it help us to find the best model? Check  the Princeton video on [Information Theory Basics](https://www.youtube.com/watch?v=bkLHszLlH34).
 - The risk of over-fitting: train and development sets
 - Decision tree hyper-parameters
-- Exercise: create a decision tree for the [Soil detection for cotton crop problem](https://www.kaggle.com/datasets/zohasohail/soil-detection-for-cotton-crop) and determine the best values for hyper-parameters Maximum depth of the tree and Minimum leaf size.
+- Exercise: create a decision tree for the [Soil detection for cotton crop problem](https://www.kaggle.com/datasets/zohasohail/soil-detection-for-cotton-crop) and determine the best values for hyper-parameters Maximum depth and Minimum leaf size.
+- Comparing  last session (perceptron) with this session (decision tree):
+
+| Class | Apr 7 | Apr 14
+|--- |--- |---
+| Model | Perceptron | Decision tree
+| Problem | regression | classification
+| Data set | train only | train and development
+| Hyperparameters | learning rate, number iterations | tree depth, leaf size, ...
+| Risk of over-fitting | very low | very high
+| Loss function | MSE=$\\sum\_{i=1}\^n (y\_i-\\hat{y\_i})\^2$ | entropy
+| Optimization | backpropagation (SGD) | brute force (try all features and all thresholds)
+| Python package | PyTorch | scikit learn
+
+  
+</details>
+
+<details markdown="block">
+<summary> Data preprocessing (Mar 21, 2025): missing data, categorical features, scaling, train and test </summary>
+
+- See (Raschka et al, 2022), Chapter 4:
+- Dealing with missing data;
+- Handling categorical data;
+- Partitioning a dataset into separate training and test datasets;
+- Bringing features onto the same scale.
+
+</details>
+
+<details markdown="block">
+<summary> Data preprocessing (Mar 28, 2025): entropy, over-fitting, train and development </summary>
+
+- See (Raschka et al, 2022), Chapter 6: Learning Best Practices for Model Evaluation and Hyperparameter Tuning
+- Streamlining workflows with pipelines
+- Using k-fold cross-validation to assess model performance
+- Debugging algorithms with learning and validation curves
+- Fine-tuning machine learning models via grid search
+- Looking at different performance evaluation metrics
+</details>
+
+<details markdown="block">
+<summary>  Combining Different Models for Ensemble Learning (Apr 4, 2025) </summary>
+
+- See (Raschka et al, 2022), Chapter 7:  Combining Different Models for Ensemble Learning
+- Ensemble classifiers
+- Ranfom Forests
+- Gradient boosting
+
 </details>
 
 --- 
