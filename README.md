@@ -140,7 +140,8 @@ The goal of the following classes is to understand how ML models can be trained 
 <details markdown="block">
 <summary> Data preprocessing (Mar 21, 2025): missing data, categorical features, scaling, train and test </summary>
 
-- See (Raschka et al, 2022), Chapter 4:
+- See (Raschka et al, 2022), Chapter 4
+- [Workflow for machine learning, Raschka et al 2022](docs/supervised_learning_flowchart_raschka_2022.png)
 - Dealing with missing data;
 - Handling categorical data;
 - Partitioning a dataset into separate training and test datasets;
@@ -164,7 +165,7 @@ The goal of the following classes is to understand how ML models can be trained 
 
 - See (Raschka et al, 2022), Chapter 7:  Combining Different Models for Ensemble Learning
 - Ensemble classifiers
-- Ranfom Forests
+- Random Forests
 - Gradient boosting
 
 </details>
