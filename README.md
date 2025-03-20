@@ -1,4 +1,4 @@
-# Links and exercises for the course Practical Machine Learning, Green Data Science, 2o semester 2024/2025
+# Links and exercises for the course Practical Machine Learning, Green Data Science, 2nd semester 2024/2025
 
 ---
 Instructor: Manuel Campagnolo, ISA/ULisboa (mlc@isa.ulisboa.pt)
@@ -118,7 +118,7 @@ The goal of the following classes is to understand how ML models can be trained 
 <details markdown="block">
 <summary> Decision trees (Mar 14, 2025): entropy, over-fitting, train and development </summary>
 
-- See (Raschka et al, 2022), Chapter 3: Decision tree learning (pg 86-98.)
+- See (Raschka et al, 2022), Chapter 3: Decision tree learning (pg 86-98)
 - See [Decision tree notes](docs/T2_decision_trees_overfitting_train_test.md)
 - How to grow a decision tree
 - What is entropy and how does it help us to find the best model? Check  the Princeton video on [Information Theory Basics](https://www.youtube.com/watch?v=bkLHszLlH34).
@@ -142,19 +142,20 @@ The goal of the following classes is to understand how ML models can be trained 
 </details>
 
 <details markdown="block">
-<summary> Data preprocessing (Mar 21, 2025): missing data, categorical features, scaling, train and test </summary>
+<summary> Data preprocessing (Mar 21, 2025): pipelines, missing data, categorical features, scaling, train and test </summary>
 
-- See (Raschka et al, 2022), Chapter 4
+- See (Raschka et al, 2022), Chapter 4 (Data Preprocessing) and Chapter 6 (Streamlining workflows with pipelines)
 - [Workflow for machine learning, Raschka et al 2022](docs/supervised_learning_flowchart_raschka_2022.png)
 - Dealing with missing data;
 - Handling categorical data;
 - Partitioning a dataset into separate training and test datasets;
-- Bringing features onto the same scale.
+- Bringing features onto the same scale; 
+- Scikit learn pipeline
 
 </details>
 
 <details markdown="block">
-<summary> Data preprocessing (Mar 28, 2025): entropy, over-fitting, train and development </summary>
+<summary>Model Evaluation and Hyperparameter Tuning (Mar 28, 2025) </summary>
 
 - See (Raschka et al, 2022), Chapter 6: Learning Best Practices for Model Evaluation and Hyperparameter Tuning
 - Streamlining workflows with pipelines
