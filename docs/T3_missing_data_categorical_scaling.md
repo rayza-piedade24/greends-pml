@@ -1,3 +1,38 @@
+[NIve example of pipeline for the Titanic data set](https://medium.com/analytics-vidhya/how-to-apply-preprocessing-steps-in-a-pipeline-only-to-specific-features-4e91fe45dfb8)
+
+
+
+## Exercise: Montesinho burned area data set (with numerical and categorical variables)
+
+Consider the dataset that described 517 fires from the Montesinho natural park in Portugal. For each incident weekday, month, coordinates, and the burnt area are recorded, as well as several meteorological data such as rain, temperature, humidity, and wind (https://www.kaggle.com/datasets/vikasukani/forest-firearea-datasets). For reference, a copy of the file is available [forestfires.csv](forestfires.csv). The variables are:
+
+- X - x-axis spatial coordinate within the Montesinho park map: 1 to 9
+- Y - y-axis spatial coordinate within the Montesinho park map: 2 to 9
+- month - month of the year: "jan" to "dec"
+- day - day of the week: "mon" to "sun"
+- FFMC - FFMC index from the FWI system: 18.7 to 96.20
+- DMC - DMC index from the FWI system: 1.1 to 291.3
+- DC - DC index from the FWI system: 7.9 to 860.6
+- ISI - ISI index from the FWI system: 0.0 to 56.10
+- temp - the temperature in Celsius degrees: 2.2 to 33.30
+- RH - relative humidity in %: 15.0 to 100
+- wind - wind speed in km/h: 0.40 to 9.40
+- rain - outside rain in mm/m2 : 0.0 to 6.4
+- area - the burned area of the forest (in ha): 0.00 to 1090.84. IN fact we are going to convert this into a binary variable by asking if fires are larger than 5 ha
+
+## Read data
+
+- Read the data and create arrays `X`and `y`. You can discard the original grid coordinates `X,Y` and just keep attributes 'month', 'day', 'FFMC', 'DMC', 'DC', 'ISI', 'temp', 'RH', 'wind', 'rain' and the response variable 'area'.
+- Try to fit a regression tree to the data. Do you get the error message `could not convert string to float: 'mar'`?
+
+## Categorical variables and `get.dummies`
+- Solve that problem with `pd.get_dummies`. What does this do?
+- What happens if you use the `drop_first=True` option?
+- And the `dtype=float` option?
+  
+
+
+
 - [sklearn Estimators that handle NaN values](https://scikit-learn.org/stable/modules/impute.html#estimators-that-handle-nan-values)
 
 - [sklearn missing values support](https://scikit-learn.org/stable/modules/tree.html#missing-values-support)
@@ -10,55 +45,78 @@
 <summary> Example with the Iris data set </summary>
 
 ```
-from sklearn.datasets import load_iris
-from sklearn import tree
-from matplotlib import pyplot as plt
-import numpy as np
-iris = load_iris()
+import pandas as pd
+# pre-processing, missing values
+from sklearn.compose import ColumnTransformer
+from sklearn.impute import SimpleImputer
+from sklearn.preprocessing import OneHotEncoder, StandardScaler, Normalizer
 
-def convert_to_nan(array, percentage=0):
-    """
-    Randomly convert a percentage of entries in a 2D array to np.nan.
-    
-    Parameters:
-    array (numpy.ndarray): Input 2D array
-    percentage (float): Percentage of entries to convert to NaN (default: 0.1 for 10%)
-    
-    Returns:
-    numpy.ndarray: Array with randomly selected entries converted to NaN
-    """
-    # Ensure the input is a numpy array
-    array = np.array(array)
-    
-    # Calculate the number of elements to convert to NaN
-    num_nan = int(percentage * array.size)
-    
-    # Generate random indices for NaN placement
-    nan_indices = np.random.choice(array.size, num_nan, replace=False)
-    
-    # Create a copy of the array, flatten it, and set the selected indices to NaN
-    result = array.copy().flatten()
-    result[nan_indices] = np.nan
-    
-    # Reshape the array back to its original shape
-    return result.reshape(array.shape)
+# pipeline
+from sklearn.pipeline import Pipeline
 
-X = convert_to_nan(iris.data)
-print(X)
-y = iris.target
-print(' labels: ', iris.target_names)
+# some models
+from sklearn.linear_model import LogisticRegression
+from sklearn.tree import DecisionTreeClassifier
+from sklearn.ensemble import RandomForestClassifier
 
-#build decision tree
-clf = tree.DecisionTreeClassifier(criterion='entropy', max_depth=4,min_samples_leaf=4,splitter='best')
-#max_depth represents max level allowed in each tree, min_samples_leaf minumum samples storable in leaf node
+# partition data
+from sklearn.model_selection import train_test_split, GridSearchCV, RepeatedStratifiedKFold
 
-#fit the tree to iris dataset
-clf.fit(X,y)
+# precision metrics
+from sklearn.metrics import classification_report, ConfusionMatrixDisplay, confusion_matrix
+import matplotlib.pyplot as plt 
 
-#plot decision tree
-fig, ax = plt.subplots(figsize=(10, 10)) #figsize value changes the size of plot
-tree.plot_tree(clf,ax=ax,feature_names=['sepal length','sepal width','petal length','petal width'])
-plt.show()
+# read data
+titanic = pd.read_csv('titanic.csv', delimiter=',',  )
+titanic.columns=[x.lower() for x in titanic.columns]
+
+categorical_features = ['pclass', 'sex', 'embarked']
+categorical_transformer = Pipeline(
+    [
+        # ('imputer_cat', SimpleImputer(strategy = 'constant', fill_value = 'missing')),
+        ('imputer_cat', SimpleImputer(strategy = 'most_frequent')),
+        ('onehot', OneHotEncoder(handle_unknown = 'ignore'))
+    ]
+)
+
+numeric_features = ['age', 'sibsp', 'parch', 'fare']
+numeric_transformer = Pipeline(
+    [
+        ('imputer_num', SimpleImputer(strategy = 'median')),
+        #('scaler', StandardScaler())
+        ('normalizer', Normalizer())
+    ]
+)
+
+preprocessor = ColumnTransformer(
+    [
+        ('categoricals', categorical_transformer, categorical_features),
+        ('numericals', numeric_transformer, numeric_features)
+    ],
+    remainder = 'drop' # By default, only the specified columns in transformers are transformed and combined in the output, and the non-specified columns are dropped.
+)
+
+pipeline = Pipeline(
+    [
+        ('preprocessing', preprocessor),
+        ('clf', RandomForestClassifier(n_estimators=10)) #tree.DecisionTreeClassifier()) # LogisticRegression())
+    ]
+)
+
+X = titanic.drop('survived', axis = 1)
+y = titanic.survived
+
+X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.20, stratify=y)
+
+pipeline.fit(X_train, y_train)
+
+y_pred=pipeline.predict(X_test)
+
+# confusion matrix
+confmat = confusion_matrix(y_true=y_test, y_pred=y_pred) #actual, predicted
+cm_display = ConfusionMatrixDisplay(confusion_matrix = confmat, display_labels = ['do not survive', 'do survive']) 
+cm_display.plot()
+plt.show() 
 ```
 
 </details>
