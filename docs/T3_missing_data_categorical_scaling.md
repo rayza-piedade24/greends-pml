@@ -9,13 +9,13 @@ There are some typical approaches:
 - Replace missing values by the mean or median of the known values (numerical variables)
 - Replace missing values by the most frequent value
 
-See [Titanic missing data notebook](notebooks/titanic_missing_data.ipynb)
+See [Titanic missing data notebook](https://github.com/isa-ulisboa/greends-pml/tree/main/notebooks/titanic_missing_data.ipynb)
 
 ## Handling categorical data
 
 Categorical data can be or not ordinal (see for example "class" and "embark_town" in the Titanic example). Ordinal data can be converted into one single numerical variable. However, non ordinal variables are typically converted into a collection of binary variables, with the possibility of dropping one to avoid redundacy.
 
-This can be done easily with `pandas.get_dummies`: see [Titanic get dummies notebook](notebooks/titanic_get_dummies.ipynb)
+This can be done easily with `pandas.get_dummies`: see [Titanic get dummies notebook](https://github.com/isa-ulisboa/greends-pml/tree/main/notebooks/titanic_get_dummies.ipynb)
 
 ## Bringing features onto the same scale
 
@@ -23,7 +23,7 @@ There are many strategies to scale different numerical attributes. The most comm
 - Rescale to a common interval, e.g. [0,1] using minimum and maximum
 - Standardize using mean and variance
 
-See [Titanic scaling notebook](notebooks/titanic_scaling.ipynb)
+See [Titanic scaling notebook](https://github.com/isa-ulisboa/greends-pml/tree/main/notebooks/titanic_scaling.ipynb)
 
 ## Pre-processing with a pipeline to avoid leakage between train and test
 
@@ -31,7 +31,7 @@ Writing code "by hand" might lead to errors and leakage in particular when using
 
 Pipelines are structured to help avoiding those problems: see [Scikit learn pipelines](https://scikit-learn.org/stable/modules/compose.html#pipeline)
 
-See a basic example of a pipeline for pre-processing data and for applying correctly methods `.transform`, `.fit` and `.predict` to train and test data: [Titanic pre-processing pipeline notebook](notebooks/titanic_preprocessing_pipeline.ipynb)
+See a basic example of a pipeline for pre-processing data and for applying correctly methods `.transform`, `.fit` and `.predict` to train and test data: [Titanic pre-processing pipeline notebook](https://github.com/isa-ulisboa/greends-pml/tree/main/notebooks/titanic_preprocessing_pipeline.ipynb)
 
 
 ## Exercise: Montesinho burned area data set (with numerical and categorical variables)
