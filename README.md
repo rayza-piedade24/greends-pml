@@ -145,13 +145,22 @@ The goal of the following classes is to understand how ML models can be trained 
 <summary> Data preprocessing (Mar 21, 2025): pipelines, missing data, categorical features, scaling, train and test </summary>
 
 - See (Raschka et al, 2022), Chapter 4 (Data Preprocessing) and Chapter 6 (Streamlining workflows with pipelines)
-- [Workflow for machine learning, Raschka et al 2022](docs/supervised_learning_flowchart_raschka_2022.png)
+- Supervised learning flowchart
+  <details markdown="block">
+  <summary>Figure 1.9 (Raschka et al, 2022) </summary>
+  <img src="https://github.com/isa-ulisboa/greends-pml/blob/main/docs/supervised_learning_flowchart_raschka_2022.png" alt="Alt Text" width="600" >
+  </details>
+- The Titanic data set example: See [Pre-processing notes](docs/T3_missing_data_categorical_scaling.md)
 - Dealing with missing data;
 - Handling categorical data;
+- Bringing features onto the same scale;
 - Partitioning a dataset into separate training and test datasets;
-- Bringing features onto the same scale; 
-- Scikit learn pipeline
-
+- Scikit learn pipeline: `.transform`, `.fit` and `.predict` methods.
+  <details markdown="block">
+  <summary>Figure 6.1 (Raschka et al, 2022) </summary>
+  <img src="https://github.com/isa-ulisboa/greends-pml/blob/main/docs/pipeline_fig_6_1.png" alt="Alt Text" width="500">
+  </details>
+- Exercise: apply the principles and code discussed above to the Montesinho burned area data set. You can convert the problem into a classification problem by categorizing the original response variable (burned area). See [Pre-processing notes](docs/T3_missing_data_categorical_scaling.md)
 </details>
 
 <details markdown="block">
