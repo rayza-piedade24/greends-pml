@@ -12,6 +12,7 @@ Given a supervised ML problem, i.e. a set of labeled examples, the goal is to bu
 
 The outputs of $f$ are called *predictions* or *predicted values*, and the actual labels of the examples are called *actual values* or *target values*.
 
+---
 
 <details markdown="block">
 <summary>  Models and parameters </summary>
@@ -103,7 +104,13 @@ In the one hand, MAE is not differentiable everywhere, which is an undesirable p
 
 An alternative is called the Huber loss function, which is differentiable everywhere, and behaves like MSE near the origin and like MAE for large $|y_i-\hat{y}_i|$.
 
-### ML as an optimization problem
+---
+
+</details>
+<details markdown="block">
+<summary> ML as an optimization problem </summary>
+  
+## ML as an optimization problem
 
 Now, we can define a ML problem as a optimization problem. Given
 
@@ -170,6 +177,8 @@ In fact, for the MSE loss function $L=\frac{1}{n}\sum_{i=1}^n \left(y_i-\hat{y}_
 
 Since those expressions correspond  to the updates in the pseudo-code, this shows that the pseudo-code is in fact using the MSE loss function and *gradient descent* to update the weights, with $\eta$ as the learning rate. The algorithm is called *stochastic* because the weights are updated after each example is assessed. The alternative is to use *batches of examples* and update weights once per batch. The extreme case of batch processing is to have a single batch containing all examples. In such case the weights are updated only once per epoch.  
 
+---
+
 </details>
 <details markdown="block">
 <summary> Computing gradients with PyTorch </summary>
@@ -209,6 +218,7 @@ The following table illustrates the changes from a basic Python script which is 
 |`def gradient(x,y,y_pred):`|`loss.backward()`
 |Update weights explicitly| `optimizer.step()`
 
+---
 
 </details>
 <details markdown="block">
