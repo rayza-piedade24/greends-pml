@@ -29,8 +29,8 @@ The goal of the first class is to give an introduction to ML and also to show so
 - See (Raschka et al, 2022), Chapter 1: Giving Computers the Ability to Learn from Data
 - Types of machine learning problems: supervised learning, unsupervised learning, reinforcement learning. Suggestion: check video [Types of machine learning](https://www.youtube.com/watch?v=gh6mNF2BGvk)
 - Supervised learning: classification vs regression 
-- Examples of input data for machine learning problems: tabular data, images, text. See *Iris data set* example with the notebook [iris_regression_classification.ipynb](https://github.com/isa-ulisboa/greends-pml/blob/main/iris_regression_classification.ipynb)
-- [Example of inference for regression over the Iris data set](https://github.com/isa-ulisboa/greends-pml/blob/main/iris_LM_inference.ipynb)
+- Examples of input data for machine learning problems: tabular data, images, text. See *Iris data set* example with the notebook [iris_regression_classification.ipynb](https://github.com/isa-ulisboa/greends-pml/blob/main/notebooks/iris_regression_classification.ipynb)
+- [Example of inference for regression over the Iris data set](https://github.com/isa-ulisboa/greends-pml/blob/main/notebooks/iris_LM_inference.ipynb)
 - Statistics vs Machine Learning: Check video: [When to use stats vs. ML?](https://www.youtube.com/watch?v=xUsm34qnE30)
 - An example of a prediction task for time series: check the notebook [modeling ground water levels](https://www.kaggle.com/code/andreshg/timeseries-analysis-a-complete-guide/) for the Kaggle competition [Acea Smart Water Analytics](https://www.kaggle.com/competitions/acea-water-prediction/). Try to download the data and run the notebook to reproduce the results. 
 </details>
@@ -42,7 +42,7 @@ The goal of the following classes is to understand how ML models can be trained 
 
 - See (Raschka et al, 2022), Chapter 2: Training Simple Machine Learning Algorithms for Classification
 - Video on the Perceptron and early times of AI [The First Neural Networks](https://www.youtube.com/watch?v=e5dVSygXbAE&t=88s)
-- Basic concepts in Machine learning: *model*, *fit*, *epochs*, *loss*, *learning rate*, *perceptron*, parameters *weights*, for a simple regression problem. See [Basic concepts notebook](docs/T1_basic_concepts.md).
+- Basic concepts in Machine learning: *model*, *fit*, *epochs*, *loss*, *learning rate*, *perceptron*, parameters *weights*, for a simple regression problem. See [Basic concepts notebook](https://github.com/isa-ulisboa/greends-pml/blob/main/docs/T1_basic_concepts.md).
 - Consider the following pseudo-code to train a simple Linear Regression model. What is the *loss* function that we aim at minimizing? What is the strategy to reduce the *loss* in each iteration? Is there a risk of *over-fitting*?
   
   ---
