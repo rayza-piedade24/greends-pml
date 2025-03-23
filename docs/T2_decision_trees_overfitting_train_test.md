@@ -10,9 +10,9 @@ The example below shows a decision tree for the iris data set. The root node rep
 We call depth of the decision tree to the maximum number of splits to define a leaf node. Note that the code establishes `max_depth=4` to prevent the tree from growing more than 4 levels. The figure indicates the number of examples (or training samples) that lie in each node of the tree. Code to run in Colab
 
 <details markdown="block">
-<summary> Basic decision tree classifier, plot tree (sklearn) </summary>
+<summary> Script: Basic decision tree classifier, plot tree, sklearn </summary>
 
-[Code to run in Colab](https://github.com/isa-ulisboa/greends-pml/blob/main/notebooks/basic_decision_tree.ipynb)
+[**Script** (link to Colab)](https://github.com/isa-ulisboa/greends-pml/blob/main/notebooks/basic_decision_tree.ipynb)
 
     from sklearn.datasets import load_iris
     from sklearn import tree
@@ -34,7 +34,13 @@ We call depth of the decision tree to the maximum number of splits to define a l
     fig, ax = plt.subplots(figsize=(10, 10)) #figsize value changes the size of plot
     tree.plot_tree(clf,ax=ax,feature_names=['sepal length','sepal width','petal length','petal width'])
     plt.show()
+
+---
+    
 </details>
+
+<details markdown="block">
+<summary> Impurity and loss </summary>
 
 ## Impurity and loss
 
@@ -70,12 +76,18 @@ $$G=1-0.5=0.5 {\rm ~and ~~} E= - 2 \times (0.5 \, \log_2 0.5)= - 2 \times (-0.5)
 
 When the node is split into two new children nodes, the loss function is calculated separately for each subset resulting from the split, and the *total loss* is the weighted sum of the losses of the subsets, where the weights are the fractions of samples in each subset. The split with the lowest total loss (i.e., the greatest reduction in entropy) is chosen as the best split. The expression for the loss of a split is the following, where $L$ can be either the entropy $E$ or the Gini criterion $G$.
 
-$$
- L = \frac{n_{\rm left}}{n} \times L_{\rm left} + \frac{n_{\rm right}}{n} \times L_{\rm right} ~~~~~~~~~(1)$$
+$$L = \frac{n_{\rm left}}{n} \times L_{\rm left} + \frac{n_{\rm right}}{n} \times L_{\rm right} ~~~~~~~~~(1)$$
 
 The rules above allow us to compute the loss for any tree computed from the data set. For each new split, Equation 1 allows us to update the *loss* of the whole tree.
 
 For the two loss function above (`entropy` and `gini`), it is guaranteed that the *total loss* of the tree cannot increase for any possible split. Therefore, there is always a reduction (strict or not) in *loss*  resulting from a split which is also called *information gain*.
+
+---
+
+</details>
+
+<details markdown="block">
+<summary> Choosing the possible splits</summary>
 
 ## Choosing the possible splits
 
@@ -102,6 +114,14 @@ The best split is the split $x_j \le x_{j(i)}$ which has the lowest value in $L$
 
 For categorical explanatory variables, when there is no order along values, in principle all $2^m$ combinations of the $m$ distinct values that the variable can take should be considered as possible splits.
 
+---
+
+</details>
+
+<details markdown="block">
+<summary> Overfitting and regularization</summary>
+
+
 ## Overfitting and regularization
 
 Decision trees are prone to *overfitting* since that if they grow enough they can approximate any decison rule with arbitrary precision. Therefore, there are different techniques to prevent decision trees of being  too large.
@@ -119,6 +139,13 @@ See all hyper-parameters for [`sklearn.tree.DecisionTreeClassifier`](https://sci
 
 See [Post pruning decision trees with cost complexity pruning of Scikit Learn](https://scikit-learn.org/stable/auto_examples/tree/plot_cost_complexity_pruning.html) for a detailed analysis on how to estimate the optimal regularization parameter $\alpha$ using train and developments data sets. 
 
+---
+
+</details>
+
+<details markdown="block">
+<summary> Choosing the best hyper-parameter values for a decision tree with a bias and variance plot</summary>
+
 ## Choosing the best hyper-parameter values for a decision tree with a bias and variance plot
 
 When fitting a decision tree, one practical problem that arises is choosing the best values for the hyper-paramenters like `max_depth`. Using solely the training set does not make sense since this would lead to over-fitting. Therefore, this choice should rely on a development data set. To make the most informed decision one should take into account not just the average precision of the decision tree over the development data set but also its variance. Plotting the *bias* and *variance* of the model for a range of values of the hyper-parameter is a useful technique to decide on the best hyper-parameter value to use. 
@@ -127,12 +154,11 @@ When fitting a decision tree, one practical problem that arises is choosing the 
 
 In general, cross-validation is a technique used to evaluate the performance of a machine learning model. It involves splitting the dataset into multiple subsets, training the model on some of them, and testing it on the remaining subsets. This allows us to estimate the performance of the model on new, unseen data.
 
-[This script](https://github.com/isa-ulisboa/greends-pml/blob/main/notebooks/decision_tree_validation_curve.ipynb) relies on `validation_curve` from `scikit-learn` to estimate bias and variance of a classification model. In fact, the code applies a family of models (decision trees) that depend on the hyper-parameter `max_depth`.  Note that the synthetic data set is generated by `make_classification`. The output plot shows clearly the issua of **overfitting** since the estimated *train* accuracy keeps growing with the depth of the tree. However, the *validation* accuracy stabilizes for when the hyper-parameter `max_depth` is larger than 6. For this example, *bias* and *variance* are estimated from the validation scores. For instance, for the model with `max_depth=4`, the estimated bias is $\approx 0.013$, which corresponds to an estimated 87% accuracy, while the estimated variance is $\approx 0.0004$, which is the plotted standard deviation ($\approx 0.02$) squared.
+[**Script**](https://github.com/isa-ulisboa/greends-pml/blob/main/notebooks/decision_tree_validation_curve.ipynb) relies on `validation_curve` from `scikit-learn` to estimate bias and variance of a classification model. In fact, the code applies a family of models (decision trees) that depend on the hyper-parameter `max_depth`.  Note that the synthetic data set is generated by `make_classification`. The output plot shows clearly the issua of **overfitting** since the estimated *train* accuracy keeps growing with the depth of the tree. However, the *validation* accuracy stabilizes for when the hyper-parameter `max_depth` is larger than 6. For this example, *bias* and *variance* are estimated from the validation scores. For instance, for the model with `max_depth=4`, the estimated bias is $\approx 0.013$, which corresponds to an estimated 87% accuracy, while the estimated variance is $\approx 0.0004$, which is the plotted standard deviation ($\approx 0.02$) squared.
 
 Suggestion: try the code above using the `gini` instead of the `entropy` criterion for spliting.
 
-
-
+</details>
 
 
 
