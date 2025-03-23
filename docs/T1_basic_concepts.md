@@ -1,7 +1,4 @@
-**Basic concepts of supervised machine learning**
-
-
-
+# Basic concepts of supervised machine learning
 
 In this course we are dealing with data sets of *labeled examples*. Examples can be described by scalar numbers, rows of tabular data, images, etc. For tabular data, we refer the to columns as *explanatory variables* (sometimes also called *independent* or *descriptive* variables).
 
@@ -16,7 +13,10 @@ Given a supervised ML problem, i.e. a set of labeled examples, the goal is to bu
 The outputs of $f$ are called *predictions* or *predicted values*, and the actual labels of the examples are called *actual values* or *target values*.
 
 
-# Models and parameters
+<details markdown="block">
+<summary>  Models and parameters </summary>
+
+## Models and parameters
 
 More formally, if $E$ is the set of examples and ${\rm labels}$ is a set that includes the labels, then what we call the *model* is a family of functions $f_{\rm \bf w}$ that depends on a set of parameters ${\rm \bf w}$ that maps an example into a label: $$f_{\rm \bf w}: E → {\rm labels}.$$
 
@@ -31,7 +31,7 @@ ML practicioners use an enormous variety of models, depending on the problem at 
 
 
 
-## Example of a simple model (simple linear regression)
+### Example of a simple model (simple linear regression)
 
 Suppose that our examples are scalar numbers $x_1,\dots, x_n$ and the labels are continuous labels $y_1, \dots, y_n$. We call $x$ the explanatory variable and $y$ the response variable.
 
@@ -42,13 +42,13 @@ $$\hat{y}= w_0 + w_1 \\, x.$$
 The target  or actual label values are the $y_1, \dots, y_n$, and the predicted label values are 
 $$\hat{y}\_1=f_{\rm w_0,w_1}(x_1),\dots,\hat{y}\_n=f_{\rm w_0,w_1}(x_n).$$
 
-## Example of a simple model (quadratic regression)
+### Example of a simple model (quadratic regression)
 
 This case is similar to the previous except the model has an additional weight associated to a quadratic term since the model $f_{\rm a,b,c}$ in that example is quadratic instead of linear. This gives increased flexibility to the model. In general the linear model can be extended to a polynomial model of any degree, with the addition of more parameters. This increases flexibility but also increases the risk of overfitting.
 
 $$f_{\rm w_0,w_1,w_2}(x)= w_0 + w_1 \\, x + w_2 \\, x^2.$$
 
-## Multiple linear regression
+### Multiple linear regression
 
 In most practical cases, there are more than one explanatory variable. For instance, for the Iris data set, we could consider that the explanatory variables are `SepalWidth` ($x_1$),  `PetalLength` ($x_2$) and `PetalWidth` ($x_3$) and the response variable is `SepalLength`  ($y$). The linear regression model is 
 $$\hat{y}=w_0 + w_1 \\, x_1 +  w_2 \\, x_2 + w_3 \\, x_3.$$
@@ -57,7 +57,7 @@ $$\hat{y}=w_0 + w_1 \\, x_1 +  w_2 \\, x_2 + w_3 \\, x_3.$$
 Note that now $x_1$ represents one explanatory variable. To represent all observations, we typically use a bold notation. So, ${\rm \bf x}_1$ represents all $n$ observations of the variable $x_1$ for the $n$ examples in the data set ($n=150$ for the complete `Iris`data set). In that case the $n$ observations are ${\rm \bf x}\_1$, ${\rm \bf x}\_2$ and ${\rm \bf x}\_3$, and the labels for the $n$ observations are  `SepalLength`  (${\rm \bf y}$), where each symbol at bold represents a *vector* of observations
 -->
 
-## Pseudo-code for linear regression
+### Pseudo-code for linear regression
 
 The following pseudo-code describes a sequence of steps find a good solution for the multiple linear regression problem. We start by reading the $n$ observations. The *hyperparameters* are the *learning rate* and the *number of iterations*. In each iteration the *weights* are updated according to the *error*, i.e. the difference between predicted and actual values of the response variable. The goal of the algorithm is to iteratively reduce the errors by converging to a better set of weights.
 
@@ -75,7 +75,11 @@ The following pseudo-code describes a sequence of steps find a good solution for
          - $w_j:=w_j +\eta \cdot {\rm error} \cdot x_j$ # `Update weight (for each feature)`
 ---      
 
-# Loss function for regression
+</details>
+<details markdown="block">
+<summary> Loss function for regression </summary>
+
+## Loss function for regression
 
 In supervised ML, it is usual to call *loss* to the **dissimilarity** between actual and predicted label values for a *set* of labeled examples.
 
@@ -85,7 +89,7 @@ $$\hat{y}\_1=f_{\rm \bf w}({\rm \bf x}\_1), \dots, \hat{y}\_n=f_{\rm \bf w}({\rm
 
 The loss over that set of examples is some dissimilarity measure between the actual labels $y_1, \dots , y_n$ and the predicted labels $\hat{y}\_1, \dots , \hat{y}\_n$.
 
-## Dissimilarity measures to define *loss*
+### Dissimilarity measures to define *loss*
 
 To define loss, we then need to choose an appropriate dissimilarity metric between a set of actual $y_1, \dots , y_n$ and predicted labels $\hat{y}\_1, \dots , \hat{y}\_n$. The choice depends on the type of problem, and while MAE or MSE are adequate for *regression* problems, other dissimilarities are used for *classification* problems.
 
@@ -99,7 +103,7 @@ In the one hand, MAE is not differentiable everywhere, which is an undesirable p
 
 An alternative is called the Huber loss function, which is differentiable everywhere, and behaves like MSE near the origin and like MAE for large $|y_i-\hat{y}_i|$.
 
-## ML as an optimization problem
+### ML as an optimization problem
 
 Now, we can define a ML problem as a optimization problem. Given
 
@@ -109,7 +113,7 @@ Now, we can define a ML problem as a optimization problem. Given
 
 The goal is to determine the optimal set of parameters ${\rm \bf w}$ that minimize the loss $L$ over that set of examples. Next, we discuss how in practice ML methods find a solution (the best set of weights) for this problem.
 
-## Gradient descent and learning rate
+### Gradient descent and learning rate
 
 Informally, a gradient measures how much the output of a function changes if you change the inputs a little bit.
 
@@ -149,7 +153,7 @@ The choice of the *learning rate* is critical for a good performance of the algo
 
 <img src="https://drive.google.com/uc?export=view&id=12c4X3po4-xVGUJKzyKC56lwl4ZEmXqWa" width="400" >
 
-## Stocastich gradient descent for Linear Regression
+### Stocastich gradient descent for Linear Regression
 
 Earlier, we looked at a pseudo-code to solve the multiple linear regression problem iteratively. The weight updates were done with the following steps:
 
@@ -166,9 +170,22 @@ In fact, for the MSE loss function $L=\frac{1}{n}\sum_{i=1}^n \left(y_i-\hat{y}_
 
 Since those expressions correspond  to the updates in the pseudo-code, this shows that the pseudo-code is in fact using the MSE loss function and *gradient descent* to update the weights, with $\eta$ as the learning rate. The algorithm is called *stochastic* because the weights are updated after each example is assessed. The alternative is to use *batches of examples* and update weights once per batch. The extreme case of batch processing is to have a single batch containing all examples. In such case the weights are updated only once per epoch.  
 
-# Computing gradients with PyTorch
+</details>
+<details markdown="block">
+<summary> Computing gradients with PyTorch </summary>
+
+## Computing gradients with PyTorch
 
 Video suggestion: [Backpropagation by Patrick Loeber](https://www.youtube.com/watch?v=3Kb0QS6z7WA&list=PLqnslRFeH2UrcDBWF5mfPGpqQDSta6VK4&index=4). The author explains what is a computation graph and how PyTorch uses it to compute gradients. The example uses a very simple model: $\hat{y}=w \cdot x$ and the MSE loss which is just $(\hat{y}-y)\^2$.
+
+- Pipeline for the regression problem:
+  - Prepare data
+  - Design model (input, output size, model: perceptron)
+  - Construct loss and optimizer
+  - Training loop
+    - Forward pass: prediction and loss
+    - Backward pass: gradients
+    - Update weights
 
 In the following examples, one starts with a step by step code in Python for the linear regression model  that is based on our knowledge of  the gradient expression for the MSE loss function and we convert it into a Pytorch code that can be easily generalized to other models and other loss functions.
 
@@ -191,6 +208,52 @@ The following table illustrates the changes from a basic Python script which is 
 | Compute *ad hoc* gradient | **Use built-in backpropagation mechanism**
 |`def gradient(x,y,y_pred):`|`loss.backward()`
 |Update weights explicitly| `optimizer.step()`
+
+
+</details>
+<details markdown="block">
+<summary> Exercise with pseudo-code for SGD </summary>
+
+## Exercise with pseudo-code for SGD
+
+Consider the following pseudo-code to train a simple Linear Regression model. What is the *loss* function that we aim at minimizing? What is the strategy to reduce the *loss* in each iteration? Is there a risk of *over-fitting*?
+  
+  ---
+  Pseudo code for SGD (stochastic gradient descent) to fit a linear regression:
+  
+  - Dataset:  $D = {(x_1^{(i)}, ..., x_n^{(i)}, y^{(i)})}\_{i=1}\^N$  `N observations, n features`
+  - Learning rate:  $\eta$ `Small positive value`
+  - Max iterations: max_iter `Number of epochs`
+  - Initial weights $w$ := $(w_0, w_1, ..., w_n)$ `Typically, all zero`
+  - For iter := 1 to max_iter 
+    - For each  $(x_1, ..., x_n, y) \in D$  `Update weights after each example`
+      - $\hat{y}$ := $w_0 + w_1 x_1 + w_2 x_2 + \dots + w_n x_n$ `Predict response with current weights`
+      - error := $y-\hat{y}$
+      - $w_0$ := $w_0 + \eta \cdot$ error # `Update weight (bias)`
+      - For $j$ := 1 to $n$
+        - $w_j$ := $w_j + \eta \cdot$ error $\cdot x_j$ # `Update weight (for each feature)`
+          
+  ---
+
+- Create a `LinearRegression` class with a `fit` method to implement the pseudo code above. Add to your class a `predict` method to make new predictions using the fitted model. Test your class with the following example.
+    
+  ```Python
+  # Create synthetic data
+  np.random.seed(0)
+  X = np.random.rand(100, 1) # array with 100 rows and 1 column (1 feature)
+  y = 2 + 3 * X + np.random.randn(100, 1) * 0.1
+  # Create and train the model
+  model = LinearRegression(learning_rate=0.1, max_iter=1000)
+  model.fit(X, y)
+  # Make predictions
+  X_test = np.array([[0.5]])
+  y_pred = model.predict(X_test)
+  print(f"Prediction for X=0.5: {y_pred[0]}")
+  ```
+- Create an animation that shows the position of the fitted line for successive epochs for the example above.
+- How can you adapt the code to address a classification problem where the response $y$ can only be 0 or 1?
+
+</details>
 
 <!---
 
