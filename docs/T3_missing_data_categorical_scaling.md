@@ -1,5 +1,14 @@
 # Pre-processing for train and test sets
 
+In these notes, we discuss several pre-processing typical steps and show how they can be organized as transformations within a structured pipeline that handles train and test data. Train data are subjected to `.fit`, `.transform` and `.predict` methods while test data are only subjected to `.transform` and `.predict`.
+
+---
+    
+</details>
+
+<details markdown="block">
+<summary>  Missing values </summary>
+
 ## Missing values
 
 Some traditional machine learning tools are designed to handle missing values: [sklearn Estimators that handle NaN values](https://scikit-learn.org/stable/modules/impute.html#estimators-that-handle-nan-values). To understand how this is done, ones needs to read the documentation.
@@ -11,29 +20,58 @@ There are some typical approaches:
 
 See [Titanic missing data notebook](https://github.com/isa-ulisboa/greends-pml/tree/main/notebooks/titanic_missing_data.ipynb)
 
+---
+    
+</details>
+
+<details markdown="block">
+<summary>Handling categorical data</summary>
+
 ## Handling categorical data
 
 Categorical data can be or not ordinal (see for example "class" and "embark_town" in the Titanic example). Ordinal data can be converted into one single numerical variable. However, non ordinal variables are typically converted into a collection of binary variables, with the possibility of dropping one to avoid redundacy.
 
 This can be done easily with `pandas.get_dummies`: see [Titanic get dummies notebook](https://github.com/isa-ulisboa/greends-pml/tree/main/notebooks/titanic_get_dummies.ipynb)
 
+---
+    
+</details>
+
+<details markdown="block">
+<summary>Bringing features onto the same scale</summary>
+
+
 ## Bringing features onto the same scale
 
 There are many strategies to scale different numerical attributes. The most common are:
 - Rescale to a common interval, e.g. [0,1] using minimum and maximum
 - Standardize using mean and variance
+Note: in this context, the `.fit` method is where the minimum, maximum, mean, standard deviation, etc, are computed. Therefore, it should only be applied to the train data set. The `.transform` method that uses those calculated parameters is identical for train and test data.
 
-See [Titanic scaling notebook](https://github.com/isa-ulisboa/greends-pml/tree/main/notebooks/titanic_scaling.ipynb)
+**Script**: See [Titanic scaling notebook](https://github.com/isa-ulisboa/greends-pml/tree/main/notebooks/titanic_scaling.ipynb)
+
+---
+    
+</details>
+
+<details markdown="block">
+<summary>Pre-processing with a pipeline to avoid leakage between train and test </summary>
 
 ## Pre-processing with a pipeline to avoid leakage between train and test
 
-Writing code "by hand" might lead to errors and leakage in particular when using test data to estimate precision. Check the blog on "How to apply preprocessing steps in a pipeline only to specific features": [pipeline for the Titanic data set](https://medium.com/analytics-vidhya/how-to-apply-preprocessing-steps-in-a-pipeline-only-to-specific-features-4e91fe45dfb8)
+Writing code "by hand" might lead to errors and leakage in particular when using test data to estimate precision. Check the blog on ["How to apply preprocessing steps in a pipeline only to specific features"](https://medium.com/analytics-vidhya/how-to-apply-preprocessing-steps-in-a-pipeline-only-to-specific-features-4e91fe45dfb8)
 
 Pipelines are structured to help avoiding those problems: see [Scikit learn pipelines](https://scikit-learn.org/stable/modules/compose.html#pipeline)
 
-See a basic example of a pipeline for pre-processing data and for applying correctly methods `.transform`, `.fit` and `.predict` to train and test data: [Titanic pre-processing pipeline notebook](https://github.com/isa-ulisboa/greends-pml/tree/main/notebooks/titanic_preprocessing_pipeline.ipynb)
+**Script**: See a basic example of a pipeline for pre-processing data and for applying correctly methods `.transform`, `.fit` and `.predict` to train and test data: [Titanic pre-processing pipeline notebook](https://github.com/isa-ulisboa/greends-pml/tree/main/notebooks/titanic_preprocessing_pipeline.ipynb)
 
+---
+    
+</details>
 
+<details markdown="block">
+<summary> Exercise: Montesinho burned area data set (with numerical and categorical variables) </summary>
+  
 ## Exercise: Montesinho burned area data set (with numerical and categorical variables)
 
 Consider the data set that describes 517 fires from the Montesinho natural park in Portugal. For each incident weekday, month, coordinates, and the burnt area are recorded, as well as several meteorological data such as rain, temperature, humidity, and wind (https://www.kaggle.com/datasets/vikasukani/forest-firearea-datasets). The variables are:
@@ -69,3 +107,4 @@ See the following Scikit-learn documentation:
 - [Pipelines](https://scikit-learn.org/stable/modules/compose.html#pipeline)
 - [ColumnTransformer for heterogeneous data](https://scikit-learn.org/stable/modules/compose.html#columntransformer-for-heterogeneous-data)
 
+</details>
