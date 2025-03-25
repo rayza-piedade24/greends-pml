@@ -89,7 +89,7 @@ The goal of the following classes is to understand how ML models can be trained 
 | Model | Perceptron | Decision tree
 | Problem | regression | classification
 | Data set | train only | train and development
-| Hyperparameters | learning rate, number iterations | tree depth, leaf size, ...
+| Hyper-parameters | learning rate, number iterations | tree depth, leaf size, ...
 | Risk of over-fitting | very low | very high
 | Loss function | $MSE=\frac{1}{n}\sum_{i=1}^n \left(y_i-\hat{y}_i\right)^2$ | entropy:  $H({\rm \bf p})=-\sum_{i=1}^n \hat{p}_i \log_2 \hat{p}_i$
 | Optimization | backpropagation (SGD) | brute force (try all features and all thresholds)
@@ -121,9 +121,9 @@ The goal of the following classes is to understand how ML models can be trained 
 </details>
 
 <details markdown="block">
-<summary>Model Evaluation and Hyperparameter Tuning (Mar 28, 2025) </summary>
+<summary>Model Evaluation and hyper-parameter Tuning (Mar 28, 2025) </summary>
 
-- See (Raschka et al, 2022), Chapter 6: Learning Best Practices for Model Evaluation and Hyperparameter Tuning
+- See (Raschka et al, 2022), Chapter 6: Learning Best Practices for Model Evaluation and hyper-parameter Tuning
 - Streamlining workflows with pipelines
 - Using k-fold cross-validation to assess model performance
 - Debugging algorithms with learning and validation curves
