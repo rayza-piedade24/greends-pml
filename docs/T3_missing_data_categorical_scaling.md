@@ -59,11 +59,43 @@ Note: in this context, the `.fit` method is where the minimum, maximum, mean, st
 
 ## Pre-processing with a pipeline to avoid leakage between train and test
 
-Writing code "by hand" might lead to errors and leakage in particular when using test data to estimate precision. Check the blog on ["How to apply preprocessing steps in a pipeline only to specific features"](https://medium.com/analytics-vidhya/how-to-apply-preprocessing-steps-in-a-pipeline-only-to-specific-features-4e91fe45dfb8)
-
-Pipelines are structured to help avoiding those problems: see [Scikit learn pipelines](https://scikit-learn.org/stable/modules/compose.html#pipeline)
+Writing code "by hand" might lead to errors and leakage in particular when using test data to estimate precision. Pipelines are structured to help avoiding those problems: see [Scikit learn pipelines](https://scikit-learn.org/stable/modules/compose.html#pipeline). Check the blog on ["How to apply preprocessing steps in a pipeline only to specific features"](https://medium.com/analytics-vidhya/how-to-apply-preprocessing-steps-in-a-pipeline-only-to-specific-features-4e91fe45dfb8)
 
 **Script**: See a basic example of a pipeline for pre-processing data and for applying correctly methods `.transform`, `.fit` and `.predict` to train and test data: [Titanic pre-processing pipeline notebook](https://github.com/isa-ulisboa/greends-pml/tree/main/notebooks/titanic_preprocessing_pipeline.ipynb)
+
+The core part of the script is the construction of the pipeline. This includes pre-processing pipelines for categorical and for numerical attributes. Then, `ColumnTransformer` applies those transformations to the data, with `remainder = 'drop'` to drop the additional attributes. Finally, `Pipeline` combines the pre-processing and classification steps. The remainder of the script follows the standard procedure that  includes `pipeline.fit(X_train, y_train)` and `y_pred=pipeline.predict(X_test)`.
+
+    categorical_features = ['pclass', 'sex', 'embarked']
+    categorical_transformer = Pipeline(
+        [
+            # ('imputer_cat', SimpleImputer(strategy = 'constant', fill_value = 'missing')),
+            ('imputer_cat', SimpleImputer(strategy = 'most_frequent')),
+            ('onehot', OneHotEncoder(handle_unknown = 'ignore'))
+        ]
+    )
+    numeric_features = ['age', 'sibsp', 'parch', 'fare']
+    numeric_transformer = Pipeline(
+        [
+            ('imputer_num', SimpleImputer(strategy = 'median')),
+            #('scaler', StandardScaler())
+            ('normalizer', Normalizer())
+        ]
+    )
+    preprocessor = ColumnTransformer(
+        [
+            ('categoricals', categorical_transformer, categorical_features),
+            ('numericals', numeric_transformer, numeric_features)
+        ],
+        remainder = 'drop' # By default, only the specified columns in transformers are transformed and combined in the output, and the non-specified columns are dropped.
+    )
+    pipeline = Pipeline(
+        [
+            ('preprocessing', preprocessor),
+            ('clf', RandomForestClassifier(n_estimators=10)) #tree.DecisionTreeClassifier()) # LogisticRegression())
+        ]
+    )
+     
+Note: the script above uses class `Pipeline`. One alternative that makes the code shorter is to use `make_pipeline` (https://scikit-learn.org/stable/modules/generated/sklearn.pipeline.make_pipeline.html). This is a shorthand for the Pipeline constructor; it does not require, and does not permit, naming the estimators. Instead, their names will be set to the lowercase of their types automatically.
 
 ---
     
