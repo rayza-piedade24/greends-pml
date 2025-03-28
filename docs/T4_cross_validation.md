@@ -130,40 +130,31 @@ To compute the error matrix for a classifier ${\bf f_{\bf w}}({\bf x})$ trained 
 
 2. Predict the labels $\hat{y}={\bf f_{\bf w}}({\bf x})$ for all examples in the test set;
 
-3. Compare the predicted labels $\hat{y}$ with the true labels $y$ and create a two-way table where the rows represent the actual labels ($y$)  and the columns represent the predicted labels $\hat{y}$.
+3. Compare the predicted labels $\hat{y}$ with the true labels $y$ and create a two-way table where the rows represent the actual labels $y$  and the columns represent the predicted labels $\hat{y}$.
 
-The following code illustrated how to compute a confusion matrix for a classification task with two classes, labeled 0 and 1, and plot the result with `matplotlib´. The matrix compares the true labels of the examples `y_true` with the labels predicted by the classifier `y_pred`:
+The following code illustrated how to compute a confusion matrix for a classification task with two classes, labeled 0 and 1, and plot the result with `matplotlib`. The matrix compares the true labels of the examples `y_true` with the labels predicted by the classifier `y_pred`:
 
 <details markdown="block">
 <summary>Script to compute confusion matrix given actual and predicted values</summary>
 
   ```
-  from sklearn.metrics import confusion_matrix
+  from sklearn.metrics import confusion_matrix, ConfusionMatrixDisplay
   import numpy as np
-  import matplotlib.pyplot as plt # to plot
-  # Actual labels
+  import matplotlib.pyplot as plt
+  
+  # Data
   y_true = np.array([0, 1, 0, 1, 1, 0, 1, 0, 0, 1])
-  # Predicted labels
   y_pred = np.array([0, 1, 1, 1, 0, 0, 1, 0, 1, 1])
-  # Compute confusion matrix
-  cm = confusion_matrix(y_true, y_pred)
-  # Define class labels
-  classes = ['Zero', 'One']
+  
   # Plot confusion matrix
-  plt.imshow(cm, interpolation='nearest', cmap=plt.cm.Blues)
-  plt.title('Confusion Matrix')
-  plt.colorbar()
-  tick_marks = np.arange(len(classes))
-  plt.xticks(tick_marks, classes, rotation=45)
-  plt.yticks(tick_marks, classes)
-  plt.xlabel('Predicted label')
-  plt.ylabel('True label')
-  # Fill in confusion matrix with values
-  thresh = cm.max() / 2.
-  for i, j in np.ndindex(cm.shape):
-      plt.text(j, i, format(cm[i, j], 'd'),
-               horizontalalignment='center',
-               color='white' if cm[i, j] > thresh else 'black')
+  ConfusionMatrixDisplay.from_predictions(
+      y_true, 
+      y_pred, 
+      display_labels=['Zero', 'One'],
+      cmap='Blues',
+      colorbar=True
+  )
+  plt.title('Confusion Matrix')  # Optional title
   plt.tight_layout()
   plt.show()
   ```
