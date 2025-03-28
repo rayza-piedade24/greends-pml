@@ -177,15 +177,15 @@ In general, if there are $n$ different label values, the error matrix is $n \tim
 
 $${\rm accuracy}=\frac{{\rm TP}+{\rm TN}}{{\rm TP}+{\rm FN}+{\rm FP}+{\rm TN}}.$$
 
-If the number of actual positive examples (TP+FN) is very different from the number of negative examples (FP+TN), the largest number is going to dominate the result. For instance, is 5% of some area is burned, but the classifier just labels all pixels as non-burned, the classification accuracy will be 95%.
+If the number of actual positive examples (TP+FN) is very different from the number of negative examples (FP+TN), the largest number is going to dominate the result. 
 
-For that example, the error matrix will look something that the following one.
+For instance, suppose we want to predict if a given area was burned or not when actually 5% of some area is burned. Consider a trivial classifier that just labels all pixels as non-burned. Then that classifier would have a classification accuracy of 95%, which doesn't make much sense. For that example, the error matrix will look something that the following one if the total number of pixels is 10000.
 
 
 |           | Predicted Burned | Predicted Non burned |
 |-----------|--------------------|--------------------|
-| Actual Burned | TP=0   | FN=50    |
-| Actual Non burned | FP=0| TN=9050|
+| Actual Burned | TP=0   | FN=500   |
+| Actual Non burned | FP=0| TN=9500|
 
 ---
 
@@ -193,15 +193,15 @@ For that example, the error matrix will look something that the following one.
 
 $${\rm precision}=\frac{{\rm TP}}{{\rm TP}+{\rm FP}}.$$
 
-This metric focusses only on the positive examples. For the burned area example above, the precision is not defined since no predictions are positive. Consider this other example, where one aims af finding greenhouses in a certain region.
+This metric focusses only on the positive examples. Consider this other example, where one aims af finding greenhouses in a certain region (where 1\% of the total area is occupoid by greenhouses).
 
 
 |           | Predicted Greenhouse | Predicted Other |
 |-----------|--------------------|--------------------|
 | Actual Greenhouse | TP=80   | FN=20    |
-| Actual Other  | FP=10| TN=9090|
+| Actual Other  | FP=10| TN=9890|
 
-In that case, precision is $80/(80+10) \approx 89\%$, while overall classification accuracy is $91.7\%$.
+In that case, precision is just $80/(80+10) \approx 89\%$, while the overall classification accuracy is $99.7\%$.
 
 Precision is the complement of **commission error**:
 
@@ -215,7 +215,7 @@ $${\rm recall}=\frac{{\rm TP}}{{\rm TP}+{\rm FN}}.$$
 
 The denominator here is the total number of actual positives. This is an interesting metric if we are focused on having a very low error on missing an actual positive (a typical example is missing a tumor in medecine).
 
-For the burned area example, the classifier has the worst possible outcome since it misses all actual positives, and therefore its ${\rm recall}=0\%$. However, a similarly arbitrary classifier that would just predict the *positive* label for all examples would have a perfect ${\rm recall}=100\%$. For the greenhouse example, we have ${\rm recall}=80\%$.
+For the burned area example, the trivial classifier labels all pixels as non-burned has the worst possible outcome since it misses all actual positives, and therefore ${\rm recall}=0\%$. For the greenhouse example, we have ${\rm recall}=80\%$.
 
 Recall is the complement of **omission error**:
 
@@ -237,7 +237,7 @@ For instance, one wants the *specificity* of a disease test to be high to preven
 
 $${\rm F1~score}= 2 \times \frac{{\rm precision} \times {\rm recall}}{{\rm precision} + {\rm recall}}=\frac{{\rm 2\\, TP}}{{\rm 2\\, TP}+{\rm FP}+{\rm FN}}.$$
 
-This is also known as the **Dice coefficient**. For the burned area example ${\rm F1~score}=0$ since in fact the F1 score is the *harmonic mean* of precision and recall. This metric still does not take into consideration true negatives (TN) and is criticized for giving the same importance to precision and recall.
+This is also known as the **Dice coefficient**. For the burned area example ${\rm F1~score}=0$ since in fact the F1 score is the *harmonic mean* of precision and recall. This metric still does not take into consideration true negatives (TN) and it is questionable since it gives the same importance to precision and recall.
 
 ---
 
