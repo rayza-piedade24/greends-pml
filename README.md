@@ -130,6 +130,7 @@ The goal of the following classes is to understand how ML models can be trained 
 - Debugging algorithms with learning and validation curves
 - Fine-tuning machine learning models via grid search
 - Looking at different performance evaluation metrics
+- Moodle quiz on basic concepts for ML: [Practical Machine Learning](https://elearning.ulisboa.pt/course/view.php?id=10469)
 </details>
 
 <details markdown="block">
