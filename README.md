@@ -84,7 +84,7 @@ The goal of the following classes is to understand how ML models can be trained 
 - Exercise: create a decision tree for the [Soil detection for cotton crop problem](https://www.kaggle.com/datasets/zohasohail/soil-detection-for-cotton-crop) and determine the best values for hyper-parameters Maximum depth and Minimum leaf size.
 - Comparing  last session (perceptron) with this session (decision tree):
 
-| Class | Apr 7 | Apr 14
+| Class | Mar 7 | Mar 14
 |--- |--- |---
 | Model | Perceptron | Decision tree
 | Problem | regression | classification
