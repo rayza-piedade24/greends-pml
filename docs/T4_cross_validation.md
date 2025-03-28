@@ -6,7 +6,7 @@
 
 ## Combining transformers and estimators in a pipeline
 
-In the previous notes where we discussed [sklearn pipelines](https://github.com/isa-ulisboa/greends-pml/blob/main/docs/T3_missing_data_categorical_scaling.md), the pipeline was created with `Pipeline`. There is, however an alternative that makes the code shorter is to use `make_pipeline` [see sklearn documentation](https://scikit-learn.org/stable/modules/generated/sklearn.pipeline.make_pipeline.html). This is a shorthand for the `Pipeline constructor`; it does not require, and does not permit, naming the estimators. Instead, their names will be set to the lowercase of their types automatically. The folowwing piece of code shows how to create a pipeline that scales the attributes and applies a logistic regression.
+In the previous notes where we discussed [sklearn pipelines](https://github.com/isa-ulisboa/greends-pml/blob/main/docs/T3_missing_data_categorical_scaling.md), the pipeline was created with `Pipeline`. There is, however an alternative that makes the code shorter is to use `make_pipeline` [see sklearn documentation](https://scikit-learn.org/stable/modules/generated/sklearn.pipeline.make_pipeline.html). This is a shorthand for the `Pipeline constructor`; it does not require, and does not permit, naming the estimators. Instead, their names will be set to the lowercase of their types automatically. The following piece of code shows how to create a pipeline that scales the attributes and applies a logistic regression.
 
   ```
   pipe_lr = make_pipeline(StandardScaler(),
