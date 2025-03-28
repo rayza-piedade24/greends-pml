@@ -124,7 +124,7 @@ The goal of the following classes is to understand how ML models can be trained 
 <summary>Model Evaluation and hyper-parameter Tuning (Mar 28, 2025) </summary>
 
 - See (Raschka et al, 2022), Chapter 6: Learning Best Practices for Model Evaluation and hyper-parameter Tuning
-- See [Cross-validation and hyper-parameter turning notes](https://github.com/isa-ulisboa/greends-pml/blob/main/docs/T4_cross_validation.md)
+- See [Cross-validation and hyper-parameter tuning notes](https://github.com/isa-ulisboa/greends-pml/blob/main/docs/T4_cross_validation.md)
 - Streamlining workflows with pipelines
 - Using k-fold cross-validation to assess model performance
 - Debugging algorithms with learning and validation curves
