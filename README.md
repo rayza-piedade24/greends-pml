@@ -76,7 +76,7 @@ The goal of the following classes is to understand how ML models can be trained 
 <summary> Decision trees (Mar 14, 2025): entropy, over-fitting, train and development </summary>
 
 - See (Raschka et al, 2022), Chapter 3: Decision tree learning (pg 86-98)
-- See [Decision tree notes](docs/T2_decision_trees_overfitting_train_test.md)
+- See [Decision tree notes](https://github.com/isa-ulisboa/greends-pml/blob/main/docs/T2_decision_trees_overfitting_train_test.md)
 - How to grow a decision tree
 - What is entropy and how does it help us to find the best model? Check  the Princeton video on [Information Theory Basics](https://www.youtube.com/watch?v=bkLHszLlH34).
 - The risk of over-fitting: train and development sets
@@ -107,7 +107,7 @@ The goal of the following classes is to understand how ML models can be trained 
   <summary>Figure 1.9 (Raschka et al, 2022) </summary>
   <img src="https://github.com/isa-ulisboa/greends-pml/blob/main/docs/supervised_learning_flowchart_raschka_2022.png" alt="Alt Text" width="600" >
   </details>
-- The Titanic data set example: See [Pre-processing notes](docs/T3_missing_data_categorical_scaling.md)
+- The Titanic data set example: See [Pre-processing notes](https://github.com/isa-ulisboa/greends-pml/blob/main/docs/T3_missing_data_categorical_scaling.md)
 - Dealing with missing data;
 - Handling categorical data;
 - Bringing features onto the same scale;
@@ -117,13 +117,14 @@ The goal of the following classes is to understand how ML models can be trained 
   <summary>Figure 6.1 (Raschka et al, 2022) </summary>
   <img src="https://github.com/isa-ulisboa/greends-pml/blob/main/docs/pipeline_fig_6_1.png" alt="Alt Text" width="500">
   </details>
-- Exercise: apply the principles and code discussed above to the Montesinho burned area data set. You can convert the problem into a classification problem by categorizing the original response variable (burned area). See [Pre-processing notes](docs/T3_missing_data_categorical_scaling.md)
+- Exercise: apply the principles and code discussed above to the Montesinho burned area data set. You can convert the problem into a classification problem by categorizing the original response variable (burned area). See [Pre-processing notes](https://github.com/isa-ulisboa/greends-pml/blob/main/docs/T3_missing_data_categorical_scaling.md)
 </details>
 
 <details markdown="block">
 <summary>Model Evaluation and hyper-parameter Tuning (Mar 28, 2025) </summary>
 
 - See (Raschka et al, 2022), Chapter 6: Learning Best Practices for Model Evaluation and hyper-parameter Tuning
+- See [Cross-validation and hyper-parameter turning notes](https://github.com/isa-ulisboa/greends-pml/blob/main/docs/T4_cross_validation.md)
 - Streamlining workflows with pipelines
 - Using k-fold cross-validation to assess model performance
 - Debugging algorithms with learning and validation curves
