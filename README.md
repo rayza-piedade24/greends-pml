@@ -121,7 +121,7 @@ The goal of the following classes is to understand how ML models can be trained 
 </details>
 
 <details markdown="block">
-<summary>Model Evaluation and hyper-parameter Tuning (Mar 28, 2025) </summary>
+<summary>Model Evaluation and hyper-parameter Tuning (Mar 28, 2025): cross-validation, strata and groups, grid-search </summary>
 
 - See (Raschka et al, 2022), Chapter 6: Learning Best Practices for Model Evaluation and hyper-parameter Tuning
 - See [Cross-validation and hyper-parameter tuning notes](https://github.com/isa-ulisboa/greends-pml/blob/main/docs/T4_cross_validation.md)
@@ -133,7 +133,7 @@ The goal of the following classes is to understand how ML models can be trained 
 </details>
 
 <details markdown="block">
-<summary>  Evaluation metrics, ROC curve and AUC (Apr 4, 2025) </summary>
+<summary>  Evaluation metrics(Apr 4, 2025): confusion matrix, precision, recall, F1-score, ROC curve, AUC </summary>
 
 - See (Raschka et al, 2022), Chapter 6: Learning Best Practices for Model Evaluation and hyper-parameter Tuning
 - See [Cross-validation and hyper-parameter tuning notes](https://github.com/isa-ulisboa/greends-pml/blob/main/docs/T4_cross_validation.md)
