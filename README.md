@@ -129,12 +129,26 @@ The goal of the following classes is to understand how ML models can be trained 
 - Using k-fold cross-validation to assess model performance
 - Debugging algorithms with learning and validation curves
 - Fine-tuning machine learning models via grid search
-- Looking at different performance evaluation metrics
 - Moodle quiz on basic concepts for ML: [Practical Machine Learning](https://elearning.ulisboa.pt/course/view.php?id=10469)
 </details>
 
 <details markdown="block">
-<summary>  Combining Different Models for Ensemble Learning (Apr 4, 2025) </summary>
+<summary>  Evaluation metrics, ROC curve and AUC (Apr 4, 2025) </summary>
+
+- See (Raschka et al, 2022), Chapter 6: Learning Best Practices for Model Evaluation and hyper-parameter Tuning
+- See [Cross-validation and hyper-parameter tuning notes](https://github.com/isa-ulisboa/greends-pml/blob/main/docs/T4_cross_validation.md)
+- Looking at different performance evaluation metrics
+- Reading a confusion matrix 
+- Optimizing the precision and recall of a classification model
+- Plotting a receiver operating characteristic (ROC)
+- Scoring metrics for multiclass classification 
+- Dealing with class imbalance
+- Discussion of assignment \#2
+
+</details>
+
+<details markdown="block">
+<summary>  Combining Different Models for Ensemble Learning (May 2, 2025) </summary>
 
 - See (Raschka et al, 2022), Chapter 7:  Combining Different Models for Ensemble Learning
 - Ensemble classifiers
