@@ -116,9 +116,9 @@ The main methods are:
 </details>
 
 <details markdown="block">
-<summary>Looking at different performance evaluation metrics</summary>
+<summary>Performance evaluation metrics for classification </summary>
 
-## Looking at different performance evaluation metrics
+## Performance evaluation metrics for classification
 
 ### Confusion matrix
 
@@ -163,7 +163,7 @@ The following code illustrated how to compute a confusion matrix for a classific
 
 ### Accuracy metrics derived from the confusion matrix
 
-In general, if there are $n$ different label values, the error matrix is $n \times n$. For simplicity, let's just consider the $2 \times 2$ error matrix, where correct predictions are called TP or TN, and the errors FP or FN.
+In general, if there are $n$ different label values, the confusion matrix is $n \times n$. For simplicity, let's just consider the $2 \times 2$ error matrix, where correct predictions are called TP or TN, and the errors FP or FN.
 
 |           | Predicted Positive | Predicted Negative |
 |-----------|--------------------|--------------------|
@@ -171,7 +171,9 @@ In general, if there are $n$ different label values, the error matrix is $n \tim
 | Actual Negative | FP=False Positive| TN=True Negative|
 
 <details markdown="block">
-<summary>Metrics are computed from the error matrix</summary>
+<summary>Metrics are computed from the confusion matrix</summary>
+
+### accuracy, precision, recall, specificity, F1-score for a two-class problem
 
 1. Classification **accuracy**.
 
@@ -243,9 +245,13 @@ This is also known as the **Dice coefficient**. For the burned area example ${\r
 
 </details>
 
-### The classification report 
+<details markdown="block">
+<summary>Classification report</summary>
 
-`sklearn` offers a function that outputs a *classification report* that includes precision, recall and F1 score, for both possible labelings of the examples:
+
+The precision metrics in a two-class classification problem depend on our decision about the *positive* class, which is typically the class of greater interest, and the *negative* class. For instance, if the problem is to determine burned areas over satellite imagery, the positive class would be *burned* and the nagative class would be *not burned*. Package `sklearn` offers a function that outputs a *classification report* that includes precision, recall and F1 score, for both possible labelings of the examples, i.e. considering both choices for the *positive* class.
+
+The next **script** illustrates the use of `classification_report`:
 
   ```
   from sklearn.metrics import classification_report
@@ -258,6 +264,34 @@ This is also known as the **Dice coefficient**. For the burned area example ${\r
   report = classification_report(y_true, y_pred)
   print(report)
   ```
+</details>
 
 </details>
+
+<details markdown="block">
+<summary>ROC curve and AUC for two-class classification problems</summary>
+
+## ROC curve and AUC for two-class classification problems
+
+Consider the burned area problem, where the goal is to predict for each pixel if the class is *burned* or *not burned*. Suppose that we use a logistic regression as a classifier which returns a likelihood of being burn, between 0 and 1, for each pixel. Then, a threshold is applied to make the final decision. The usual threshold for prediction is 50% but there is no *a priori* reason to choose that threshold. 
+
+Therefore, we can test our results for a range of thresholds. For instance, if the threshold is set as 70%, the model predicts an observation as positive only if the predicted probability is greater than 70%. Adjusting the threshold value changes some of the predicted labels and the overall performance of the classifier. Usually, a high threshold makes the prediction of the positive class less likely. This tends to increase both the false positive rate (FPR) and the true positive rate (TPR).
+
+ROC curves typically feature true positive rate (TPR) on the Y axis, and false positive rate (FPR) on the X axis. This means that the top left corner of the plot is the “ideal” point - a FPR of zero, and a TPR of one (https://scikit-learn.org/stable/auto_examples/model_selection/plot_roc_crossval.html).
+
+<details markdown="block">
+<summary>Example of a ROC curve</summary>
+
+<img src="https://upload.wikimedia.org/wikipedia/commons/thumb/1/13/Roc_curve.svg/220px-Roc_curve.svg.png" width="400" >
+<img src="https://miro.medium.com/v2/resize:fit:702/format:webp/0*pF07ZmzBqbvkvqJO.png" width="400" >
+
+</details>
+
+The **AUC** is the area under the ROC curve. Its maximum value is 1, when the classifier return a correct decision regardless of the threshold value. *AUC* does not depend on the classification threshold, since it integrates all thresholds.
+
+[**Script** for drawing a ROC curve and computing the AUC from the classifier for the Wine Quality data set](https://github.com/isa-ulisboa/greends-pml/blob/main/notebooks/wine_quality_RocCurveDisplay.ipynb)
+
+</details>
+
+
 
