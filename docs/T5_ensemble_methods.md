@@ -7,102 +7,107 @@
 
 Recall decision and regression trees -- see for instance [Normalized Nerd videos](https://www.youtube.com/channel/UC7Fs-Fdpe0I8GYg3lboEuXw) on classification and regression trees.
 
-Random forest are ensemble learning methods that involve:
+Random forests are ensemble learning methods that involve:
   - (bootstraping) Creating a collection of trees from bootstrap samples (sampling with replacement); [see meaning](https://en.wikipedia.org/wiki/Bootstrapping)
   - (decorrelating) Decorrelate models by randomly selecting features
   - (aggregating) Ensembling the collection of trees by majority vote.
 
 <img src="https://github.com/isa-ulisboa/greends-pml/blob/main/figures/random_forests.png" width="600" >
 
-The following pseudo-code provides the main steps to create a random forest.
-
-<details markdown="block">
-<summary> Pseudo-code to create and apply a Random Forest</summary>
-
-### Step 1: Initialize Parameters
-1. Set the number of trees `N_trees`.
-2. Define the maximum depth of each tree `max_depth`.
-3. Set the number of features to consider when splitting `max_features`.
-
-### Step 2: Prepare the Data
-1. Split the dataset into training and testing sets.
-2. Preprocess the data (e.g., handle missing values, normalize if needed).
-
-### Step 3: Build the Random Forest
-1. Initialize an empty list `forest` to store decision trees.
-
-2. For each tree `i` in range(1, N_trees):
-   - **Step 3.1:** Create a bootstrap sample:
-     - Randomly sample the training data with replacement to create a subset.
-   - **Step 3.2:** Train a decision tree:
-     - Select a random subset of features (`max_features`).
-     - Grow the tree using the bootstrap sample:
-       - At each node, split on the best feature (based on criteria like Gini Impurity or Entropy for classification, or variance for regression).
-       - Stop splitting if `max_depth` is reached or other stopping criteria are met.
-   - **Step 3.3:** Add the trained decision tree to `forest`.
-
-### Step 4: Make Predictions
-1. For a new data point:
-   - Pass it through each tree in the forest.
-   - Collect predictions from all trees (majority vote for classification, or weighted mean for regression).
-
-2. Return the final prediction.
-
-### Step 5: Evaluate Performance
-1. Use the testing set to evaluate accuracy or other metrics (e.g., precision, recall).
+The pseudo-code below describes the main steps to create a random forest.
 
 ---
 
-</details>
-
-<details markdown="block">
-<summary> Why do random forest reduce the variance of the estimator?</summary>
-
-For simplicity, let's consider regression trees and show that the goal of ensembling trees with random forests is reducing the variance. 
-
-Let  $X_i$ be  the random variable  that represents the predition for the regression tree $T_i$ from the collection, with $\rho={\rm cor}[X_i,X_j]$ being the correlation between $X_i$ and $X_j$. The prediction from the ensemble is
-
-$$\bar{X}=\frac{1}{n} \left( X_1+\dots+X_B \right)$$
-
-and its variance is given by
-
-$${\rm Var}[\bar{X}]=  \rho \, \sigma^2 + \frac{1-\rho}{B} \sigma^2,$$
-
-where ${\rm Var}[X-i]=\sigma^2$ and $B$ is the number of bootstrap samples. As long as $\rho$ does not grow with $B$, which is why the trees are decorrelated, using a larger ensemble will increase $B$ and reduce ${\rm Var}[\bar{X}]$, which is the goal of ensembling estimators.
-
----
-
-</details>
-
-<details markdown="block">
-<summary> Script to create random forest with scikit-learn</summary>
-
-```
-from sklearn.ensemble import RandomForestClassifier
-from sklearn.datasets import load_iris
-from sklearn.model_selection import train_test_split
-from sklearn.metrics import accuracy_score
-
-# Load the Iris dataset
-iris = load_iris()
-X = iris.data
-y = iris.target
-
-# Split the dataset into training and testing sets
-X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_state=42)
-# Create a Random Forest classifier
-rf_classifier = RandomForestClassifier(n_estimators=100, random_state=42)
-# Train the classifier
-rf_classifier.fit(X_train, y_train)
-# Make predictions on the test set
-y_pred = rf_classifier.predict(X_test)
-# Evaluate the accuracy of the classifier
-accuracy = accuracy_score(y_test, y_pred)
-print("Accuracy:", accuracy)
-```
----
-
-</details>
+  <details markdown="block">
+  <summary> Pseudo-code to create and apply a Random Forest</summary>
+  
+  ### Step 1: Initialize Parameters
+  1. Set the number of trees `N_trees`.
+  2. Define the maximum depth of each tree `max_depth`.
+  3. Set the number of features to consider when splitting `max_features`.
+  
+  ### Step 2: Prepare the Data
+  1. Split the dataset into training and testing sets.
+  2. Preprocess the data (e.g., handle missing values, normalize if needed).
+  
+  ### Step 3: Build the Random Forest
+  1. Initialize an empty list `forest` to store decision trees.
+  
+  2. For each tree `i` in range(1, N_trees):
+     - **Step 3.1:** Create a bootstrap sample:
+       - Randomly sample the training data with replacement to create a subset.
+     - **Step 3.2:** Train a decision tree:
+       - Select a random subset of features (`max_features`).
+       - Grow the tree using the bootstrap sample:
+         - At each node, split on the best feature (based on criteria like Gini Impurity or Entropy for classification, or variance for regression).
+         - Stop splitting if `max_depth` is reached or other stopping criteria are met.
+     - **Step 3.3:** Add the trained decision tree to `forest`.
+  
+  ### Step 4: Make Predictions
+  1. For a new data point:
+     - Pass it through each tree in the forest.
+     - Collect predictions from all trees (majority vote for classification, or weighted mean for regression).
+  
+  2. Return the final prediction.
+  
+  ### Step 5: Evaluate Performance
+  1. Use the testing set to evaluate accuracy or other metrics (e.g., precision, recall).
+  
+  ---
+  
+  </details>
+  
+  <details markdown="block">
+  <summary> Why do random forest reduce the variance of the estimator?</summary>
+  
+  
+  For simplicity, let's consider regression trees and show that the goal of ensembling trees with random forests is reducing the variance. 
+  
+  Let  $X_i$ be  the random variable  that represents the predition for the regression tree $T_i$ from the collection, with $\rho={\rm cor}[X_i,X_j]$ being the correlation between $X_i$ and $X_j$. The prediction from the ensemble is
+  
+  $$\bar{X}=\frac{1}{n} \left( X_1+\dots+X_B \right)$$
+  
+  and its variance is given by
+  
+  $${\rm Var}[\bar{X}]=  \rho \, \sigma^2 + \frac{1-\rho}{B} \sigma^2,$$
+  
+  where ${\rm Var}[X-i]=\sigma^2$ and $B$ is the number of bootstrap samples. As long as $\rho$ does not grow with $B$, which is why the trees are decorrelated, using a larger ensemble will increase $B$ and reduce ${\rm Var}[\bar{X}]$, which is the goal of ensembling estimators.
+  
+  ---
+  
+  </details>
+  
+  <details markdown="block">
+  <summary> Script to create random forest with scikit-learn</summary>
+  
+  ```
+  from sklearn.ensemble import RandomForestClassifier
+  from sklearn.datasets import load_iris
+  from sklearn.model_selection import train_test_split
+  from sklearn.metrics import accuracy_score
+  
+  # Load the Iris dataset
+  iris = load_iris()
+  X = iris.data
+  y = iris.target
+  
+  # Split the dataset into training and testing sets
+  X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_state=42)
+  # Create a Random Forest classifier
+  rf_classifier = RandomForestClassifier(n_estimators=100, random_state=42)
+  # Train the classifier
+  rf_classifier.fit(X_train, y_train)
+  # Make predictions on the test set
+  y_pred = rf_classifier.predict(X_test)
+  # Evaluate the accuracy of the classifier
+  accuracy = accuracy_score(y_test, y_pred)
+  print("Accuracy:", accuracy)
+  ```
+  
+  
+  </details>
+  
+  ---
 
 </details>
 
