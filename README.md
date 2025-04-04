@@ -133,7 +133,7 @@ The goal of the following classes is to understand how ML models can be trained 
 </details>
 
 <details markdown="block">
-<summary>  Evaluation metrics(Apr 4, 2025): confusion matrix, precision, recall, F1-score, ROC curve, AUC </summary>
+<summary>  Evaluation metrics (Apr 4, 2025): confusion matrix, precision, recall, F1-score, ROC curve, AUC </summary>
 
 - See (Raschka et al, 2022), Chapter 6: Learning Best Practices for Model Evaluation and hyper-parameter Tuning
 - See [Cross-validation and hyper-parameter tuning notes](https://github.com/isa-ulisboa/greends-pml/blob/main/docs/T4_cross_validation.md)
@@ -151,9 +151,11 @@ The goal of the following classes is to understand how ML models can be trained 
 <summary>  Combining Different Models for Ensemble Learning (May 2, 2025) </summary>
 
 - See (Raschka et al, 2022), Chapter 7:  Combining Different Models for Ensemble Learning
+- See [Notes on ensemble learning and variable importance](https://github.com/isa-ulisboa/greends-pml/blob/main/docs/T5_ensemble_methods.md)
 - Ensemble classifiers
 - Random Forests
 - Gradient boosting
+- Variable importance: MDI (Gini importance) and MDA (permutation importance) 
 
 </details>
 
