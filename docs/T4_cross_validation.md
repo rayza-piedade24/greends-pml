@@ -84,7 +84,7 @@ A [learning curve](https://scikit-learn.org/stable/modules/generated/sklearn.mod
 
 A [validation curve](https://scikit-learn.org/stable/modules/generated/sklearn.model_selection.validation_curve.html#sklearn.model_selection.validation_curve) determine training and test scores for varying parameter values. This is equivalent to grid search (see below) for a single parameter.
 
-**Script** to read italian wine region data and create learning curve for a given classifier: (https://github.com/isa-ulisboa/greends-pml/blob/main/notebooks/learning_curve.ipynb)
+**Script** to read italian wine region data and create learning curve for a given classifier: (https://github.com/isa-ulisboa/greends-pml/blob/main/notebooks/wine_regions_learning_curve.ipynb)
 
 ---
 
