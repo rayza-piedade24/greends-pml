@@ -148,13 +148,14 @@ The goal of the following classes is to understand how ML models can be trained 
 </details>
 
 <details markdown="block">
-<summary>  Combining Different Models for Ensemble Learning (May 2, 2025) </summary>
+<summary>  Combining Different Models for Ensemble Learning (May 2, 2025): random forest, gradient boosting, variable importance </summary>
 
 - See (Raschka et al, 2022), Chapter 7:  Combining Different Models for Ensemble Learning
 - See [Notes on ensemble learning and variable importance](https://github.com/isa-ulisboa/greends-pml/blob/main/docs/T5_ensemble_methods.md)
 - Ensemble classifiers
 - Random Forests
 - Gradient boosting
+- Exercise: adapt the classification pipeline to apply the XGBoost classifier (Montesinho burned area data set)
 - Variable importance: MDI (Gini importance) and MDA (permutation importance) 
 
 </details>
