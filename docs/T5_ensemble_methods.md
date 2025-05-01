@@ -69,7 +69,7 @@ The pseudo-code below describes the main steps to create a random forest.
   
   and its variance is given by
   
-  $${\rm Var}[\bar{X}]=  \rho \, \sigma^2 + \frac{1-\rho}{B} \sigma^2,$$
+  $${\rm Var}[\bar{X}]=  \rho \\, \sigma^2 + \frac{1-\rho}{B} \sigma^2,$$
   
   where ${\rm Var}[X-i]=\sigma^2$ and $B$ is the number of bootstrap samples. As long as $\rho$ does not grow with $B$, which is why the trees are decorrelated, using a larger ensemble will increase $B$ and reduce ${\rm Var}[\bar{X}]$, which is the goal of ensembling estimators.
   
