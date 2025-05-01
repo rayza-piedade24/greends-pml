@@ -1,25 +1,41 @@
 # Ensemble methods
 
+The goal of ensemble methods is to combine different classifiers into a meta-classifier that has better generalization performance than each individual classifier alone. 
+
+<details markdown="block">
+  <summary> Illustration of  the ensemble approach</summary>
+
+  <img src="https://github.com/isa-ulisboa/greends-pml/blob/main/figures/ensemble_approach_fig_72.png" width="600" >
+
+ </details>
+
+The motivation for this can be found in the "Wisdom of the crowd" concept, which originates with observations of Francis Galton in 1906: see for instance this [BBC video](https://youtu.be/iOucwX7Z1HU?si=Dk1Tc4J-bv9Ow1rG).
+
+---
+
 <details markdown="block">
 <summary> Random Forests </summary>
 
 ## Random forests
 
-Recall decision and regression trees -- see for instance [Normalized Nerd videos](https://www.youtube.com/channel/UC7Fs-Fdpe0I8GYg3lboEuXw) on classification and regression trees.
+We have discussed and used  decision and regression trees: recall that the goal is to create a tree that minimizes the impurity (measured by entropy of by the Gini indez) of the new nodes.  -- see for instance [Normalized Nerd videos](https://www.youtube.com/channel/UC7Fs-Fdpe0I8GYg3lboEuXw) on classification and regression trees. 
 
 Random forests are ensemble learning methods that involve:
   - (bootstraping) Creating a collection of trees from bootstrap samples (sampling with replacement); [see meaning](https://en.wikipedia.org/wiki/Bootstrapping)
   - (decorrelating) Decorrelate models by randomly selecting features
   - (aggregating) Ensembling the collection of trees by majority vote.
 
+<details markdown="block">
+<summary> Illustration of the construction of a random forest</summary>
+
 <img src="https://github.com/isa-ulisboa/greends-pml/blob/main/figures/random_forests.png" width="600" >
 
-The pseudo-code below describes the main steps to create a random forest.
+</details>
 
----
 
-  <details markdown="block">
-  <summary> Pseudo-code to create and apply a Random Forest</summary>
+<details markdown="block">
+  <summary> Pseudo-code with the main steps to create a random forest. </summary>
+
   
   ### Step 1: Initialize Parameters
   1. Set the number of trees `N_trees`.
@@ -71,7 +87,7 @@ The pseudo-code below describes the main steps to create a random forest.
   
   $${\rm Var}[\bar{X}]=  \rho \\, \sigma^2 + \frac{1-\rho}{B} \sigma^2,$$
   
-  where ${\rm Var}[X-i]=\sigma^2$ and $B$ is the number of bootstrap samples. As long as $\rho$ does not grow with $B$, which is why the trees are decorrelated, using a larger ensemble will increase $B$ and reduce ${\rm Var}[\bar{X}]$, which is the goal of ensembling estimators.
+  where ${\rm Var}[X-i]=\sigma^2$ and $B$ is the number of bootstrap samples. *As long as $\rho$ does not grow with $B$*, which is why the trees are decorrelated, using a larger ensemble will increase $B$ and reduce ${\rm Var}[\bar{X}]$, which is the goal of ensembling estimators.
   
   ---
   
@@ -106,10 +122,10 @@ The pseudo-code below describes the main steps to create a random forest.
   
   
   </details>
-  
-  ---
 
 </details>
+
+---
 
 <details markdown="block">
 <summary> Adaboost </summary>
@@ -125,9 +141,9 @@ base learners based on their overall predictive performance.
 
 **AdaBoost** is a *dependent* ML method since each tree is an improvement over previous trees in the sequence. This is the opposite of *random forests* where the tree are grown independently.
 
---- 
-
 </details>
+
+---
 
 <details markdown="block">
 <summary> Gradient boosting </summary>
@@ -142,9 +158,42 @@ For details and very nice illustrations, look at the two following posts:
 
 2. [Classification](https://towardsdatascience.com/all-you-need-to-know-about-gradient-boosting-algorithm-part-2-classification-d3ed8f56541e)
 
---- 
+</details>
+
+---
+
+<details markdown="block">
+
+<summary> Gradient boosting vs Adaboost </summary>
+
+| Feature | AdaBoost | Gradient Boosting |
+| :-- | :-- | :-- |
+| **Main Idea** | Focuses on misclassified samples by adjusting their weights after each iteration | Fits each new learner to the residual errors (negative gradients) of the previous model|
+| **Loss Function** | Uses exponential loss (mainly for classification) | Can use any differentiable loss function (flexible for regression and classification) |
+| **Weak Learners** | Typically uses shallow trees (decision stumps, depth=1) | Can use deeper trees (depth > 1) |
+| **Weighting** | Assigns weights to both samples and learners; misclassified samples get higher weights, and stronger learners have more influence | All trees usually have equal weight; model update is additive|
+| **Flexibility** | Less flexible (mainly for classification, some regression)| More flexible (supports various loss functions and tasks)|
+| **Interpretability** | More intuitive; easy to understand the effect of reweighting | Less intuitive; based on gradient descent optimization |
+| **Performance** | Fast and simple; can be sensitive to noisy data and outliers | Often achieves higher accuracy; better handles complex data but slower to train |
+| **Adoption** | Legacy technique, less common in recent competitions. | Widely adopted, state-of-the-art in many ML tasks |
 
 </details>
+
+---
+
+<details markdown="block">
+
+<summary> Exercise with the XGboost classifier </summary>
+
+Consider the Montesinho burned area data set described in https://github.com/isa-ulisboa/greends-pml/blob/main/docs/T3_missing_data_categorical_scaling.md. The goal is to predict the variable `y` which has been discretized: y is 0 when the burned area is lower than 5 ha and it is 1 otherwise.
+
+1. Adapt the  pipeline for preprocessing and classification available in the notebook https://github.com/isa-ulisboa/greends-pml/blob/main/notebooks/forest_fire.ipynb and replace the `RandomForestClassifier` by `XGBClassifier` which is available under the `xgboost` package;
+2. Try varying some parameters of the XGBClassifier like `n_estimators`,  `learning_rate`, `max_depth` to understand how they affect the precision of the result and the computation time;
+3. Still using the same pipeline, replace `train_test_split` for training and testing by cross validation with `StratifiedKFold` where stratification uses the response variable `y`
+
+</details>
+
+---
 
 <details markdown="block">
 <summary> Variable importance</summary>
