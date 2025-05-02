@@ -156,7 +156,8 @@ The goal of the following classes is to understand how ML models can be trained 
 - Random Forests
 - Gradient boosting
 - Exercise: adapt the classification pipeline to apply the XGBoost classifier (Montesinho burned area data set)
-- Variable importance: MDI (Gini importance) and MDA (permutation importance) 
+- Variable importance: MDI (Gini importance) and MDA (permutation importance)
+- Pipeline that includes feature selection, followed by hyperparameter search: https://github.com/isa-ulisboa/greends-pml/blob/main/notebooks/wine_region_pipeline_XGB_CV_gridsearch_featselection.ipynb
 
 </details>
 
