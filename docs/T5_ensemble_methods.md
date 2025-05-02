@@ -119,8 +119,62 @@ Random forests are ensemble learning methods that involve:
   accuracy = accuracy_score(y_test, y_pred)
   print("Accuracy:", accuracy)
   ```
+
+  </details>
+
   
+  <details markdown="block">
+  <summary> Script that illustrates that random forests are easily parallelizable for reducing computation time. </summary>
   
+  The script uses the option `jobs=-1` to run `RandomForestClassifier` over all cores. Compare processing time for that same code on your local machine when setting `jobs=1` (using a single core). Random forests  are easily parallelizable since each tree is grown independently from the remainder trees.
+
+  ```
+  from sklearn.datasets import make_classification
+  from sklearn.ensemble import RandomForestClassifier
+  from sklearn.model_selection import train_test_split
+  from sklearn.metrics import accuracy_score
+  import time
+  import numpy as np
+  
+  start1 = time.perf_counter()  # High-resolution timer
+  start2 = time.process_time()  # Measures CPU time (ignores sleep/wait)
+  
+  X, y = make_classification(
+      n_samples=10000,       # Number of examples
+      n_features=20,        # Total features
+      n_informative=5,      # Meaningful features
+      n_redundant=2,        # Linearly dependent features
+      n_classes=2,          # Binary classification
+      n_clusters_per_class=2,  # Cluster count per class
+      random_state=42
+  )
+  
+  # Split data
+  X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.3, random_state=42)
+  
+  # Create parallelized Random Forest with 500 trees
+  clf = RandomForestClassifier(
+      n_estimators=1000,  # Number of trees
+      n_jobs=-1,         # Use all available cores (-1 = all cores)
+      verbose=1,         # Show progress
+      random_state=42
+  )
+  
+  # Train the model
+  clf.fit(X_train, y_train)
+  
+  # Make predictions
+  y_pred = clf.predict(X_test)
+  
+  # Evaluate accuracy
+  print(f"Accuracy: {accuracy_score(y_test, y_pred):.2%}")
+  
+  end1 = time.perf_counter()
+  end2 = time.process_time()
+  
+  print(f"Elapsed: {end1 - start1:.4f} seconds")  # Format to 4 decimal places
+  print(f"CPU time: {end2 - start2:.4f} seconds")  # Format to 4 decimal places
+  ```
   </details>
 
 </details>
