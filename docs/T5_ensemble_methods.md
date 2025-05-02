@@ -141,6 +141,30 @@ base learners based on their overall predictive performance.
 
 **AdaBoost** is a *dependent* ML method since each tree is an improvement over previous trees in the sequence. This is the opposite of *random forests* where the tree are grown independently.
 
+For clear details and nice illustrations, see https://medium.com/towards-data-science/adaboost-classifier-explained-a-visual-guide-with-code-examples-fc0f25326d7b
+
+</details>
+
+---
+
+<details markdown="block">
+
+<summary> Random Forests vs Adaboost </summary>
+
+| **Feature**               | **Random Forest**                                                                 | **AdaBoost**                                                                 |
+|---------------------------|-----------------------------------------------------------------------------------|------------------------------------------------------------------------------|
+| **Base Model Type**       | Full decision trees (variable depth)                                              | Decision stumps (1-node trees) or weak learners                              |
+| **Training Approach**     | Parallel training via bagging (Bootstrap Aggregating)                             | Sequential training via boosting (weighted error correction)                 |
+| **Data Sampling**         | Bootstrap samples with replacement for each tree                                  | Original data with instance reweighting based on errors                      |
+| **Feature Selection**     | Random subset of features at each node                                            | Single feature per stump (weak learner focus)                                |
+| **Model Weights**         | Equal voting weight for all trees                                                 | Weighted voting based on individual learner accuracy                         |
+| **Overfitting Risk**      | Lower due to bagging and feature randomness                                       | Higher, especially with noisy data (focuses on error correction)             |
+| **Complexity**            | High complexity per tree (full decision trees)                                    | Low complexity per stump (simple weak learners)                              |
+| **Training Speed**        | Faster (parallelizable trees)                                                     | Slower (sequential dependency between learners)                              |
+| **Noise Handling**        | Robust due to feature/tree diversity                                              | Sensitive (error correction amplifies noise impact)                          |
+| **Key Strength**          | Generalization through diverse tree ensembles                                     | High accuracy through iterative error correction                             |
+| **Best Use Case**         | Large datasets with mixed feature types                                           | Smaller datasets with clear patterns (low noise)                             |
+
 </details>
 
 ---
@@ -150,7 +174,7 @@ base learners based on their overall predictive performance.
 
 ## Gradient boosting
 
-Gradient Boost is also a *dependent* method, since each tree is an improvement of the earlier trees. Gradient Boost provides a framework to build an ensemble of trees based on an arbitrary loss function. In Gradient Boosting, each new tree is computed using a **simple classifier** (also called weak inducer, that just performs better than random) the **residuals** from the previous model.
+Gradient Boost is also a *dependent* method, since each tree is an improvement of the earlier trees. Gradient Boost provides a framework to build an ensemble of trees based on an arbitrary loss function. In Gradient Boosting, each new tree is computed using a **simple classifier** (also called weak inducer, that just performs better than random) over the **residuals** from the previous model.
 
 For details and very nice illustrations, look at the two following posts:
 
