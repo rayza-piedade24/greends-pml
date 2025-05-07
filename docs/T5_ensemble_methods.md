@@ -96,7 +96,7 @@ Random forests are ensemble learning methods that involve:
   <details markdown="block">
   <summary> Script to create random forest with scikit-learn</summary>
   
-  ```
+  ```python
   from sklearn.ensemble import RandomForestClassifier
   from sklearn.datasets import load_iris
   from sklearn.model_selection import train_test_split
@@ -128,7 +128,7 @@ Random forests are ensemble learning methods that involve:
   
   The script uses the option `jobs=-1` to run `RandomForestClassifier` over all cores. Compare processing time for that same code on your local machine when setting `jobs=1` (using a single core). Random forests  are easily parallelizable since each tree is grown independently from the remainder trees.
 
-  ```
+  ```python
   from sklearn.datasets import make_classification
   from sklearn.ensemble import RandomForestClassifier
   from sklearn.model_selection import train_test_split
@@ -306,7 +306,7 @@ MDI exhibits empirical bias towards variables that possess a category having a h
 <details markdown="block">
 <summary> Script to compute MDI for different classifiers for the Iris data set</summary>
 
-```
+```python
 import numpy as np
 import matplotlib.pyplot as plt
 from sklearn.datasets import load_iris
@@ -314,6 +314,7 @@ from sklearn.tree import DecisionTreeClassifier
 from sklearn.ensemble import RandomForestClassifier
 from sklearn.ensemble import AdaBoostClassifier
 from sklearn.ensemble import GradientBoostingClassifier
+from sklearn.model_selection import train_test_split
 
 # Load the Iris dataset
 iris = load_iris()
@@ -321,17 +322,20 @@ X = iris.data
 y = iris.target
 feature_names = iris.feature_names
 
+# train and test
+X_train, X_test, y_train, y_test = train_test_split(X, y, stratify=y, random_state=42)
+
 # Create Random Forest classifier
 rf_clf = RandomForestClassifier(random_state=42)
 rf_clf.fit(X, y)
 
 # Create AdaBoost classifier with decision tree base estimator
 ada_clf = AdaBoostClassifier(estimator=DecisionTreeClassifier(max_depth=3), random_state=42)
-ada_clf.fit(X, y)
+ada_clf.fit(X_train, y_train)
 
 # Create Gradient Boosting classifier
 gb_clf = GradientBoostingClassifier(random_state=42)
-gb_clf.fit(X, y)
+gb_clf.fit(X_train, y_train)
 
 # Calculate feature importance for each classifier
 rf_importance = rf_clf.feature_importances_
@@ -361,6 +365,58 @@ ax.legend()
 plt.tight_layout()
 plt.show()
 ```
+</details>
+
+<details markdown="block">
+<summary> Script to compute permutation importance over the test data for the Iris data set</summary>
+
+```python
+from sklearn.datasets import load_iris
+from sklearn.ensemble import GradientBoostingClassifier
+from sklearn.model_selection import train_test_split
+import pandas as pd
+import numpy as np
+import matplotlib.pyplot as plt
+
+# Load the Iris dataset
+iris = load_iris()
+X = iris.data
+y = iris.target
+feature_names = np.array(iris.feature_names)
+
+# train and test
+X_train, X_test, y_train, y_test = train_test_split(X, y, stratify=y, random_state=42)
+
+# Create Gradient Boosting classifier
+gb_clf = GradientBoostingClassifier(random_state=42)
+gb_clf.fit(X_train, y_train)
+
+result = permutation_importance(
+    gb_clf, X_test, y_test, n_repeats=10, random_state=42, n_jobs=-1
+)
+
+sorted_importances_idx = result.importances_mean.argsort()
+importances = pd.DataFrame(
+    result.importances[sorted_importances_idx].T,
+    columns=feature_names[sorted_importances_idx],
+)
+ax = importances.plot.box(vert=False, whis=10)
+ax.set_title("Permutation Importances (test set)")
+ax.axvline(x=0, color="k", linestyle="--")
+ax.set_xlabel("Decrease in accuracy score")
+ax.figure.tight_layout()
+
+# Show the plot
+plt.tight_layout()
+plt.show()
+```
+
+Compare the results for MDI and permutation importance:
+- Create a scatter plot for the Iris data set so you can understand what is the correlation between variables for each class
+- Compare MDI and permutation importance (MDA) for features which are highly correlated
+- Try removing features with high importance and compute importance again to see the effect on the remaining features
+- Conclude that importance relative: one feature can be very important or not depending on the remaining features
+
 ---
 
 </details>
