@@ -42,7 +42,7 @@ The goal of the following classes is to understand how ML models can be trained 
 
 - See (Raschka et al, 2022), Chapter 2: Training Simple Machine Learning Algorithms for Classification
 - Video on the Perceptron and early times of AI [The First Neural Networks](https://www.youtube.com/watch?v=e5dVSygXbAE&t=88s)
-- Basic concepts in Machine learning: *model*, *fit*, *epochs*, *loss*, *learning rate*, *perceptron*, parameters *weights*, for a simple regression problem. See [Basic concepts notebook](https://github.com/isa-ulisboa/greends-pml/blob/main/docs/T1_basic_concepts.md).
+- Basic concepts in Machine learning: *model*, *fit*, *epochs*, *loss*, *learning rate*, *perceptron*, parameters *weights*, for a simple regression problem. See [Basic concepts notes](https://github.com/isa-ulisboa/greends-pml/blob/main/docs/T1_basic_concepts.md).
 - Exercise: pseudo-code to train a simple Linear Regression model. See [Basic concepts notes](https://github.com/isa-ulisboa/greends-pml/blob/main/docs/T1_basic_concepts.md). 
 </details>
 
@@ -159,6 +159,16 @@ The goal of the following classes is to understand how ML models can be trained 
 - Variable importance: MDI (Gini importance) and MDA (permutation importance)
 - Pipeline that includes feature selection, followed by hyperparameter search: https://github.com/isa-ulisboa/greends-pml/blob/main/notebooks/wine_region_pipeline_XGB_CV_gridsearch_featselection.ipynb
 
+</details>
+
+<details markdown="block">
+<summary> Introduction to deep learning  (May 9, 2025): multi-layer perceptron, activation function, input,  output,  batches</summary>
+
+- See (Raschka et al, 2022), Chapter 11:   Implementing a Multilayer Artificial Neural Network from Scratch
+- See [Notes on multilayer models](https://github.com/isa-ulisboa/greends-pml/blob/main/docs/T6_multilayer_models.md). The idea is to extend the concept of gradient-based optimization multilayer neural networks based on the backpropagation algorithm.
+- See [Veritasium video (3'42 to 14'50)](https://www.youtube.com/watch?v=GVsUOuSjvcg) for an historic introduction to multilayer network for machine learning.
+- See []
+  
 </details>
 
 --- 
