@@ -297,125 +297,22 @@ only, since it strongly relies on the tree structure, whereas MDA is an instanti
 the permutation importance that can be used for any predictive model. Both measures
 are used in practice even if they possess several major drawbacks.
 
-**MDI** is known to favor variables with many categories. Even when variables have the same number of categories,
+- **MDI** is known to favor variables with many categories. Even when variables have the same number of categories,
 MDI exhibits empirical bias towards variables that possess a category having a high frequency. MDI is also biased in presence of correlated features.
 
-**MDA** seems to exhibit less bias than MDI but tends to overestimate correlated features. 
+- **MDA** seems to exhibit less bias than MDI but tends to overestimate correlated features. 
 
+**Exercise**: run and adapt scripts below to answer to the questions on the interpretation and comparision of MDI and MDA
 
-<details markdown="block">
-<summary> Script to compute MDI for different classifiers for the Iris data set</summary>
+1. Script to compute MDI for different classifiers for the Iris data set: https://github.com/isa-ulisboa/greends-pml/blob/main/notebooks/iris_mdi_importance_rf.py Note: this script allows you to easily remove features from the data set.
 
-```python
-import numpy as np
-import matplotlib.pyplot as plt
-from sklearn.datasets import load_iris
-from sklearn.tree import DecisionTreeClassifier
-from sklearn.ensemble import RandomForestClassifier
-from sklearn.ensemble import AdaBoostClassifier
-from sklearn.ensemble import GradientBoostingClassifier
-from sklearn.model_selection import train_test_split
+2. Script to compute permutation importance over the test data for the Iris data set:  https://github.com/isa-ulisboa/greends-pml/blob/main/notebooks/iris_mdi_importance_rf.py Note: this script allows you to easily remove features from the data set.
 
-# Load the Iris dataset
-iris = load_iris()
-X = iris.data
-y = iris.target
-feature_names = iris.feature_names
-
-# train and test
-X_train, X_test, y_train, y_test = train_test_split(X, y, stratify=y, random_state=42)
-
-# Create Random Forest classifier
-rf_clf = RandomForestClassifier(random_state=42)
-rf_clf.fit(X, y)
-
-# Create AdaBoost classifier with decision tree base estimator
-ada_clf = AdaBoostClassifier(estimator=DecisionTreeClassifier(max_depth=3), random_state=42)
-ada_clf.fit(X_train, y_train)
-
-# Create Gradient Boosting classifier
-gb_clf = GradientBoostingClassifier(random_state=42)
-gb_clf.fit(X_train, y_train)
-
-# Calculate feature importance for each classifier
-rf_importance = rf_clf.feature_importances_
-ada_importance = ada_clf.feature_importances_
-gb_importance = gb_clf.feature_importances_
-
-# Set up the figure
-fig, ax = plt.subplots(figsize=(8, 6))
-
-# Plot the feature importance
-x = np.arange(len(feature_names))
-width = 0.2
-
-rects1 = ax.bar(x - width, rf_importance, width, label='Random Forest')
-rects2 = ax.bar(x, ada_importance, width, label='AdaBoost')
-rects3 = ax.bar(x + width, gb_importance, width, label='Gradient Boosting')
-
-# Add labels, title, and legend
-ax.set_xlabel('Features')
-ax.set_ylabel('Importance')
-ax.set_title('Feature Importance Comparison')
-ax.set_xticks(x)
-ax.set_xticklabels(feature_names)
-ax.legend()
-
-# Show the plot
-plt.tight_layout()
-plt.show()
-```
-</details>
-
-<details markdown="block">
-<summary> Script to compute permutation importance over the test data for the Iris data set</summary>
-
-```python
-from sklearn.datasets import load_iris
-from sklearn.ensemble import GradientBoostingClassifier
-from sklearn.model_selection import train_test_split
-import pandas as pd
-import numpy as np
-import matplotlib.pyplot as plt
-
-# Load the Iris dataset
-iris = load_iris()
-X = iris.data
-y = iris.target
-feature_names = np.array(iris.feature_names)
-
-# train and test
-X_train, X_test, y_train, y_test = train_test_split(X, y, stratify=y, random_state=42)
-
-# Create Gradient Boosting classifier
-gb_clf = GradientBoostingClassifier(random_state=42)
-gb_clf.fit(X_train, y_train)
-
-result = permutation_importance(
-    gb_clf, X_test, y_test, n_repeats=10, random_state=42, n_jobs=-1
-)
-
-sorted_importances_idx = result.importances_mean.argsort()
-importances = pd.DataFrame(
-    result.importances[sorted_importances_idx].T,
-    columns=feature_names[sorted_importances_idx],
-)
-ax = importances.plot.box(vert=False, whis=10)
-ax.set_title("Permutation Importances (test set)")
-ax.axvline(x=0, color="k", linestyle="--")
-ax.set_xlabel("Decrease in accuracy score")
-ax.figure.tight_layout()
-
-# Show the plot
-plt.tight_layout()
-plt.show()
-```
-
-Compare the results for MDI and permutation importance:
+3. Compare the results for MDI and permutation importance:
 - Create a scatter plot for the Iris data set so you can understand what is the correlation between variables for each class
 - Compare MDI and permutation importance (MDA) for features which are highly correlated
 - Try removing features with high importance and compute importance again to see the effect on the remaining features
-- Conclude that importance relative: one feature can be very important or not depending on the remaining features
+- Conclude that importance is relative: one feature can be very important or not depending on the remaining features
 
 ---
 
