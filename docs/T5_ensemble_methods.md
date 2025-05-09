@@ -306,7 +306,7 @@ MDI exhibits empirical bias towards variables that possess a category having a h
 
 1. Script to compute MDI for different classifiers for the Iris data set: https://github.com/isa-ulisboa/greends-pml/blob/main/notebooks/iris_mdi_importance_rf.py Note: this script allows you to easily remove features from the data set.
 
-2. Script to compute permutation importance over the test data for the Iris data set:  https://github.com/isa-ulisboa/greends-pml/blob/main/notebooks/iris_mdi_importance_rf.py Note: this script allows you to easily remove features from the data set.
+2. Script to compute permutation importance over the test data for the Iris data set:  https://github.com/isa-ulisboa/greends-pml/blob/main/notebooks/iris_permutation_importance_rf_ada_gb.py Note: this script allows you to easily remove features from the data set.
 
 3. Compare the results for MDI and permutation importance:
 - Create a scatter plot for the Iris data set so you can understand what is the correlation between variables for each class
