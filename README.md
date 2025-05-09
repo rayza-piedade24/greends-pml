@@ -165,9 +165,9 @@ The goal of the following classes is to understand how ML models can be trained 
 <summary> Data pipelines for deep learning  (May 9, 2025):  PyTorch, datasets, dataloaders</summary>
 
 - See (Raschka et al, 2022), Chapter 12:   Parallelizing Neural Network Training with PyTorch
-- See [Notes on introduction do data pipelines for deep learning](https://github.com/isa-ulisboa/greends-pml/blob/main/docs/T6_data_pipeline_pytorch.md). With deep learning (DL), it is possible to solve problems that involve complex input data like images, text and audio. The first step in order to apply DL is to organize the input data. PyTorch provides some key tools like `Dataset` and `DataLoader` that allow the creation of robust pipelines for DL.
+- See [Notebook on introduction do data pipelines for deep learning](https://github.com/isa-ulisboa/greends-pml/blob/main/notebooks/T6_pytorch_dataset_dataloader.ipynb). With deep learning (DL), it is possible to solve problems that involve complex input data like images, text and audio. The first step in order to apply DL is to organize the input data. PyTorch provides some key tools like `Dataset` and `DataLoader` that allow the creation of robust pipelines for DL.
 - See [Veritasium video (3'42 to 14'50)](https://www.youtube.com/watch?v=GVsUOuSjvcg) for an historic introduction to multilayer neural networks  for deep learning.
-- See []
+- Run an interpret the code in pages 386-388 with an example of a dataset (`CelebA`) with several labels.
   
 </details>
 
