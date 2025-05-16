@@ -174,7 +174,7 @@ The goal of the following classes is to understand how ML models can be trained 
 <details markdown="block">
 <summary> Pipeline for deep learning with PyTorch (May 16, 2025):  data, model, model training and validation</summary>
 
-- See (Raschka et al, 2022), Chapter ...
+- See (Raschka et al, 2022), Chapter 12: pp 389 to the end,  and Chapter 13: Going Deeper – The Mechanics of PyTorch, namely the MNIST project (ppp 436-439)
 - See [Notebook the typical pipeline for deep learning with (non-convolutional) neural networks](https://github.com/isa-ulisboa/greends-pml/blob/main/notebooks/T7_torch_NN_pipeline.ipynb). 
 
   
