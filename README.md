@@ -162,14 +162,15 @@ The goal of the following classes is to understand how ML models can be trained 
 </details>
 
 <details markdown="block">
-<summary> Data pipelines for deep learning  (May 9, 2025):  PyTorch, datasets, dataloaders</summary>
+<summary> Data pipeline for deep learning  (May 9, 2025):  PyTorch, datasets, dataloaders</summary>
 
 - See (Raschka et al, 2022), Chapter 12:   Parallelizing Neural Network Training with PyTorch
-- See [Notebook on introduction do data pipelines for deep learning](https://github.com/isa-ulisboa/greends-pml/blob/main/notebooks/T6_pytorch_dataset_dataloader.ipynb). With deep learning (DL), it is possible to solve problems that involve complex input data like images, text and audio. The first step in order to apply DL is to organize the input data. PyTorch provides some key tools like `Dataset` and `DataLoader` that allow the creation of robust pipelines for DL.
+- See [Notebook on introduction to data pipelines for deep learning](https://github.com/isa-ulisboa/greends-pml/blob/main/notebooks/T6_pytorch_dataset_dataloader.ipynb). With deep learning (DL), it is possible to solve problems that involve complex input data like images, text and audio. The first step in order to apply DL is to organize the input data. PyTorch provides some key tools like `Dataset` and `DataLoader` that allow the creation of robust pipelines for DL.
 - See [Veritasium video (3'42 to 14'50)](https://www.youtube.com/watch?v=GVsUOuSjvcg) for an historic introduction to multilayer neural networks  for deep learning.
 - Run an interpret the code in pages 386-388 with an example of a dataset (`CelebA`) with several labels.
   
 </details>
+
 
 <details markdown="block">
 <summary> Pipeline for deep learning with PyTorch (May 16, 2025):  data, model, model training and validation</summary>
@@ -181,10 +182,17 @@ The goal of the following classes is to understand how ML models can be trained 
   - [PyTorch Course (2022), Part 4: Image Classification (MNIST)](https://www.youtube.com/watch?v=gBw0u_5u0qU)
   - [PyTorch Crash Course - Getting Started with Deep Learning](https://www.youtube.com/watch?v=OIenNRt2bjg)
   - [Build Your First Pytorch Model In Minutes! [Tutorial + Code](https://www.youtube.com/watch?v=tHL5STNJKag)
-
-  
+    
 </details>
 
+<details markdown="block">
+<summary> Deep convolutional neural networks  (May 23, 2025):  </summary>
+
+- See (Raschka et al, 2022), Chapter 14: Classifying Images with Deep Convolutional Neural Networks
+- See [Notebook on introduction convolutional neural networks](https://github.com/isa-ulisboa/greends-pml/blob/main/notebooks/T8_CNNs.ipynb). 
+- Application of CNNs to the MNIST problem.
+  
+</details>
 
 --- 
 
