@@ -221,8 +221,5 @@ The goal of the following classes is to understand how ML models can be trained 
 </details>
  
 
-</details>
-
--->
 
 
