@@ -201,8 +201,10 @@ The goal of the following classes is to understand how ML models can be trained 
 <details markdown="block">
 <summary> Model deployment  (May 30, 2025):  saving and loading ML model, Gradio, Hugging Face places</summary>
 
-- Build a interface with Gradio
-- Creating an app in Hugging Face places
+- Saving and loading a PyTorch model: (1) Saving and Loading the Entire Model (Pickle-Based); (2) TorchScript Export (`jit`); (3) Saving Only State Dict (Most Flexible, Requires Architecture)
+- Deploying models with HF spaces. Choose a simple image classification app on Hugging Face spaces (e.g. https://huggingface.co/spaces/ByTixty1/Date_fruit-image-Classification/blob/main/app.py) and test it. Check the files `app.py`, `requirements.py`, `model.pth`. Try to understand the contents of `app.py` which runs Gradio and defines the interface.
+- Build a interface with Gradio from scratch
+- Create your app in Hugging Face places
 - Suggestions of videos:
   - [How to deploy a gradio app on huggingface (43')](https://www.youtube.com/watch?v=bN9WTxzLBRE&t=1845s)
   
