@@ -187,7 +187,7 @@ The goal of the following classes is to understand how ML models can be trained 
 </details>
 
 <details markdown="block">
-<summary> Deep convolutional neural networks  (May 23, 2025):  </summary>
+<summary> Deep convolutional neural networks  (May 23, 2025): input preparation, convolution, model architecture, receptive field </summary>
 
 - See (Raschka et al, 2022), Chapter 14: Classifying Images with Deep Convolutional Neural Networks
 - Check introductory video [What are CNNs?, by IBM (6'20)](https://www.youtube.com/watch?v=QzY57FaENXg)
@@ -195,6 +195,16 @@ The goal of the following classes is to understand how ML models can be trained 
 - Application of CNNs to the MNIST problem.
 - Suggestions of videos:
   - [MIT 6.S191: Convolutional Neural Networks 2025 (1:01)](https://www.youtube.com/watch?v=oGpzWAlP5p0)
+  
+</details>
+
+<details markdown="block">
+<summary> Model deployment  (May 30, 2025):  saving and loading ML model, Gradio, Hugging Face places</summary>
+
+- Build a interface with Gradio
+- Creating an app in Hugging Face places
+- Suggestions of videos:
+  - [How to deploy a gradio app on huggingface (43')](https://www.youtube.com/watch?v=bN9WTxzLBRE&t=1845s)
   
 </details>
 
