@@ -201,12 +201,18 @@ The goal of the following classes is to understand how ML models can be trained 
 <details markdown="block">
 <summary> Model deployment  (May 30, 2025):  saving and loading ML model, Gradio, Hugging Face places</summary>
 
-- Saving and loading a PyTorch model: (1) Saving and Loading the Entire Model (Pickle-Based); (2) TorchScript Export (`jit`); (3) Saving Only State Dict (Most Flexible, Requires Architecture)
+- Saving and loading a PyTorch model. The following notebooks contain full pipelines to train a classifier for the MNIST dataset, including training (with `cuda` if available) and validation. The novelty is that we save the trained model after each epoch so it can be loaded later (for validation). This illustrates how a trained ML model can be saved to a file and loaded from a file, which is needed for deployment, fine-tuning and transfer learning.
+  - https://github.com/isa-ulisboa/greends-pml/blob/main/notebooks/T9b_MNIST_CNNs_pipeline_save_load_model.ipynb : save the full model, which only works if the model is saved and loaded in the same device, which can be adequate for development in a local machine but is not recommended in general;
+  - https://github.com/isa-ulisboa/greends-pml/blob/main/notebooks/T9c_MNIST_CNNs_pipeline_save_load_state_dict.ipynb : save only the model's learned parameters; it is the recommended way to save PyTorch models; to load, one first need to instantiate the model architecture and then load the weights.
+  - https://github.com/isa-ulisboa/greends-pml/blob/main/notebooks/T9d_MNIST_CNNs_pipeline_save_load_jit_format.ipynb : JIT compilation provides a way to package your PyTorch model into a self-contained, optimized, and platform-independent format
 - Deploying models with HF spaces. Choose a simple image classification app on Hugging Face spaces (e.g. https://huggingface.co/spaces/ByTixty1/Date_fruit-image-Classification/blob/main/app.py) and test it. Check the files `app.py`, `requirements.py`, `model.pth`. Try to understand the contents of `app.py` which runs Gradio and defines the interface.
+- You can clone that repository from HF spaces to your local machine and run the app locally. Try making some changes (for instance, the messages to the user) on `app.py` and launch the app on your local machine to observe the changes.
 - Build a interface with Gradio from scratch
-- Create your app in Hugging Face places
+- Create your app in Hugging Face places: ideally you should build and test the app locally, and then push it to your HF space (she video below).
 - Suggestions of videos:
   - [How to deploy a gradio app on huggingface (43')](https://www.youtube.com/watch?v=bN9WTxzLBRE&t=1845s)
+  - [How to Create a Hugging Face Space: A Beginner's Guide (16')](https://www.youtube.com/watch?v=xqdTFyRdtjQ). Very clear video with a list of steps for creating HF space, creating basic files, testing on the local machine and pushing the Gradio interface into HF spaces. However, there are no details about the `app.py` code itself nor about the model that is deployed.
+- Assignment #4: deploy a ML model on HF spaces (see Moodle)
   
 </details>
 
